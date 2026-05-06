@@ -1,0 +1,127 @@
+---
+// src/components/astro/ChatbotIntegration.astro
+// Modular Chatbot Architecture
+// Supports: Crisp, Chatbase, Tidio, Intercom, Voiceflow
+
+const provider = import.meta.env.PUBLIC_CHATBOT_PROVIDER || '';
+const id = import.meta.env.PUBLIC_CHATBOT_ID || '';
+---
+
+{provider && id && (
+  <>
+    {/* ── Injection Logic (Lazy Loaded via requestIdleCallback) ── */}
+    <script is:inline define:vars={{ provider, id }}>
+      function initChatbot() {
+        if (provider === 'crisp') {
+          window.$crisp = [];
+          window.CRISP_WEBSITE_ID = id;
+          (function() {
+            var d = document;
+            var s = d.createElement("script");
+            s.src = "https://client.crisp.chat/l.js";
+            s.async = true;
+            d.getElementsByTagName("head")[0].appendChild(s);
+          })();
+        } else if (provider === 'chatbase') {
+          window.chatbaseConfig = { chatbotId: id };
+          (function() {
+            var d = document;
+            var s = d.createElement("script");
+            s.src = "https://www.chatbase.co/embed.min.js";
+            s.id = id;
+            s.domain = "www.chatbase.co";
+            s.async = true;
+            d.getElementsByTagName("head")[0].appendChild(s);
+          })();
+        } else if (provider === 'tidio') {
+          (function() {
+            var d = document;
+            var s = d.createElement("script");
+            s.src = "//code.tidio.co/" + id + ".js";
+            s.async = true;
+            d.getElementsByTagName("head")[0].appendChild(s);
+          })();
+        } else if (provider === 'intercom') {
+          window.intercomSettings = { api_base: "https://api-iam.intercom.io", app_id: id };
+          (function(){
+            var w=window;var ic=w.Intercom;
+            if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{
+            var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};
+            w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;
+            s.src='https://widget.intercom.io/widget/' + id;var x=d.getElementsByTagName('script')[0];
+            x.parentNode.insertBefore(s,x);};if(document.readyState==='complete'){l();}else{w.addEventListener('load',l,false);}}
+          })();
+        } else if (provider === 'voiceflow') {
+          (function(d, t) {
+            var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+            v.onload = function() {
+              window.voiceflow.chat.load({
+                verify: { projectID: id }
+              });
+            }
+            v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+          })(document, 'script');
+        }
+      }
+
+      // Lazy execution to preserve Lighthouse scores
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(initChatbot, { timeout: 3000 });
+      } else {
+        setTimeout(initChatbot, 3000);
+      }
+    </script>
+  </>
+)}
+
+<style is:global>
+  /* 
+    PREMIUM INDUSTRIAL OVERRIDES
+    We enforce absolute control over third-party chatbot widgets to 
+    maintain the SENGKO cinematic architectural aesthetic.
+  */
+
+  /* Generic safe positioning avoiding footer overlap */
+  #chatbase-bubble,
+  .crisp-client,
+  #tidio-chat-iframe,
+  .intercom-lightweight-app {
+    bottom: max(2rem, env(safe-area-inset-bottom)) !important;
+    right: max(2rem, env(safe-area-inset-right)) !important;
+    z-index: 80 !important; /* Above content, below mobile menu overlay (z:90) */
+  }
+
+  /* Chatbase specific styling */
+  #chatbase-bubble-window {
+    border-radius: 0px !important;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5) !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+  }
+  
+  #chatbase-bubble-button {
+    background-color: var(--color-primary) !important;
+    border-radius: 0px !important;
+    box-shadow: 0 10px 20px rgba(183, 245, 0, 0.15) !important;
+  }
+
+  /* Crisp specific styling */
+  .crisp-client * {
+    --cc-color-focus: var(--color-primary) !important;
+    --cc-color-hover: var(--color-primary) !important;
+  }
+
+  .crisp-client .cc-1x {
+    border-radius: 0px !important;
+  }
+
+  /* Mobile Overrides */
+  @media (max-width: 768px) {
+    #chatbase-bubble,
+    .crisp-client,
+    #tidio-chat-iframe,
+    .intercom-lightweight-app {
+      bottom: 1rem !important;
+      right: 1rem !important;
+    }
+  }
+</style>

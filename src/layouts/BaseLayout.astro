@@ -3,6 +3,7 @@ import '../styles/global.css';
 import { siteConfig } from '../data/site-config';
 
 import Header from '../components/astro/Header.astro';
+import ChatbotIntegration from '../components/astro/ChatbotIntegration.astro';
 
 interface Props {
   title?: string;
@@ -53,6 +54,7 @@ const {
   <body>
     <Header />
     <slot />
+    <ChatbotIntegration />
   </body>
 </html>
 
