@@ -1,0 +1,204 @@
+---
+---
+
+<header id="main-header" class="fixed top-0 left-0 w-full z-[100] transition-all duration-500 py-6">
+  <div class="px-6 lg:px-10 flex justify-between items-center max-w-[1920px] mx-auto relative z-[110]">
+    <!-- Logo Branding -->
+    <a href="/" class="block shrink-0">
+      <img 
+        id="nav-logo"
+        src="/images/branding/logo-sengko-primary.svg" 
+        alt="SENGKO" 
+        class="h-[18px] md:h-[26px] w-auto transition-all duration-500 block"
+      />
+    </a>
+
+    <!-- Right Controls -->
+    <div class="flex items-center gap-8 md:gap-12">
+      <a href="mailto:contact@sengko.com" class="hidden sm:block label px-8 py-3.5 border border-white/10 text-white text-[9px] hover:bg-white hover:text-black hover:border-white transition-all duration-500">
+        Iniciar Proyecto
+      </a>
+
+      <!-- Hamburger Button -->
+      <button id="menu-toggle" class="group flex flex-col items-end gap-1.5 p-2 relative">
+        <span class="w-8 h-[1px] bg-white transition-all duration-500 group-hover:w-10 line-1"></span>
+        <span class="w-6 h-[1px] bg-white transition-all duration-500 group-hover:w-10 line-2"></span>
+        <span class="w-10 h-[1px] bg-white transition-all duration-500 line-3"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Fullscreen Overlay (Outside Header for Z-Index Clarity) -->
+<div id="menu-overlay" class="fixed inset-0 bg-[#0A0A0A] z-[90] flex flex-col lg:flex-row pointer-events-none" style="visibility: hidden; opacity: 0;">
+  <!-- Left: Menu Links -->
+  <div class="flex-1 flex flex-col justify-center px-6 md:px-20 lg:px-32 relative z-10">
+    <nav class="flex flex-col gap-6 md:gap-10">
+      <a href="/proyectos" class="menu-link group/link" data-preview="/images/projects/parqueadero-01.jpg">
+        <span class="menu-link-index">01</span>
+        <span class="menu-link-text">Proyectos</span>
+      </a>
+      <a href="/servicios" class="menu-link group/link" data-preview="/images/services/bim-model.jpg">
+        <span class="menu-link-index">02</span>
+        <span class="menu-link-text">Servicios</span>
+      </a>
+      <a href="/contacto" class="menu-link group/link" data-preview="/images/projects/edificio-01.jpg">
+        <span class="menu-link-index">03</span>
+        <span class="menu-link-text">Contacto</span>
+      </a>
+    </nav>
+
+    <div class="mt-20 pt-10 border-t border-white/5 flex gap-12 text-[10px] tracking-[0.2em] uppercase text-white/40">
+      <a href="#" class="hover:text-white transition-colors">Instagram</a>
+      <a href="#" class="hover:text-white transition-colors">LinkedIn</a>
+    </div>
+  </div>
+
+  <!-- Right: Dynamic Preview -->
+  <div class="hidden lg:block w-2/5 relative overflow-hidden h-full border-l border-white/5 bg-black">
+    <div id="menu-preview-container" class="absolute inset-0">
+      <img id="menu-preview-img" src="/images/projects/parqueadero-01.jpg" class="w-full h-full object-cover grayscale brightness-50 opacity-0 transition-all duration-1000 scale-110" />
+      <div class="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] to-transparent"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import gsap from 'gsap';
+  import ScrollTrigger from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+
+  const header = document.getElementById('main-header')!;
+  const toggleBtn = document.getElementById('menu-toggle')!;
+  const overlay = document.getElementById('menu-overlay')!;
+  const previewImg = document.getElementById('menu-preview-img') as HTMLImageElement;
+  const menuLinks = document.querySelectorAll('.menu-link');
+
+  let isMenuOpen = false;
+
+  // 1. Initial State
+  gsap.set('.menu-link', { y: 80, opacity: 0 });
+
+  // 2. Menu Animation Timeline
+  const menuTl = gsap.timeline({ paused: true });
+
+  menuTl
+    .to(overlay, { autoAlpha: 1, duration: 0.8, ease: 'expo.inOut' })
+    .fromTo(overlay, { scale: 1.05 }, { scale: 1, duration: 1.2, ease: 'expo.out' }, 0)
+    .to('.menu-link', { 
+      y: 0, 
+      opacity: 1, 
+      stagger: 0.1, 
+      duration: 0.8, 
+      ease: 'power3.out' 
+    }, '-=0.4');
+
+  // 3. Toggle Action
+  toggleBtn.addEventListener('click', () => {
+    isMenuOpen = !isMenuOpen;
+    
+    if (isMenuOpen) {
+      menuTl.play();
+      overlay.style.pointerEvents = 'auto';
+      document.body.style.overflow = 'hidden';
+      
+      // Animate hamburger to X
+      gsap.to('.line-1', { rotation: 45, y: 7, width: 32, duration: 0.4 });
+      gsap.to('.line-2', { opacity: 0, duration: 0.2 });
+      gsap.to('.line-3', { rotation: -45, y: -7, width: 32, duration: 0.4 });
+    } else {
+      menuTl.reverse();
+      overlay.style.pointerEvents = 'none';
+      document.body.style.overflow = '';
+      
+      // Reset hamburger
+      gsap.to('.line-1', { rotation: 0, y: 0, width: 32, duration: 0.4 });
+      gsap.to('.line-2', { opacity: 1, duration: 0.4 });
+      gsap.to('.line-3', { rotation: 0, y: 0, width: 40, duration: 0.4 });
+    }
+  });
+
+  // 4. Hover Previews
+  menuLinks.forEach(link => {
+    link.addEventListener('mouseenter', (e) => {
+      const target = e.currentTarget as HTMLElement;
+      const newImg = target.dataset.preview;
+      
+      if (newImg && previewImg) {
+        gsap.killTweensOf(previewImg);
+        gsap.to(previewImg, { opacity: 0, scale: 1.05, duration: 0.4, onComplete: () => {
+          previewImg.src = newImg;
+          gsap.to(previewImg, { opacity: 0.4, scale: 1, duration: 1, ease: 'power2.out' });
+        }});
+      }
+
+      gsap.to(link, { x: 30, duration: 0.6, ease: 'expo.out' });
+      menuLinks.forEach(l => { if(l !== link) gsap.to(l, { opacity: 0.15, duration: 0.6 }); });
+    });
+
+    link.addEventListener('mouseleave', () => {
+      gsap.to(link, { x: 0, duration: 0.6, ease: 'expo.out' });
+      menuLinks.forEach(l => gsap.to(l, { opacity: 1, duration: 0.6 }));
+    });
+  });
+
+  // 5. Header scroll effect
+  ScrollTrigger.create({
+    start: '80px top',
+    onEnter: () => header.classList.add('header-scrolled'),
+    onLeaveBack: () => header.classList.remove('header-scrolled')
+  });
+</script>
+
+<style>
+  #main-header {
+    transition: background 0.6s cubic-bezier(0.19, 1, 0.22, 1), padding 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  #main-header.header-scrolled {
+    background: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .menu-link {
+    display: flex;
+    align-items: baseline;
+    gap: 2rem;
+    color: white;
+    text-decoration: none;
+    transition: color 0.4s ease;
+    position: relative;
+    width: fit-content;
+  }
+
+  .menu-link-index {
+    font-size: 14px;
+    font-family: var(--font-body);
+    color: var(--color-primary);
+    opacity: 0.6;
+    letter-spacing: 0.2em;
+    font-weight: 500;
+  }
+
+  .menu-link-text {
+    font-size: clamp(54px, 10vw, 120px);
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .menu-link:hover .menu-link-text {
+    color: var(--color-primary);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 1023px) {
+    .menu-link-text { font-size: clamp(40px, 12vw, 80px); }
+    .menu-link { gap: 1rem; }
+  }
+</style>

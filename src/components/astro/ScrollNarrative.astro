@@ -1,0 +1,364 @@
+---
+// CINEMATIC SCROLL NARRATIVE
+// GSAP ScrollTrigger · 400vh · scrub 1.2 · staggered in/out
+---
+
+<section id="process-section" class="process-section">
+
+  <div class="process-sticky" id="process-sticky">
+
+    <!-- ── RIGHT: images (behind) ── -->
+    <div class="process-right" id="process-right">
+      {[
+        '/images/projects/bodega-textil-01.jpg',
+        '/images/projects/gonvarri-01.jpg',
+        '/images/projects/parqueadero-01.jpg',
+        '/images/projects/edificio-01.jpg',
+      ].map((src, i) => (
+        <div class="process-img-wrap" data-img={i}>
+          <img
+            src={src}
+            alt={`Proceso ${i + 1}`}
+            class="process-img"
+            loading={i === 0 ? 'eager' : 'lazy'}
+          />
+        </div>
+      ))}
+
+      <!-- Dramatic left gradient — gives the text panel its drama -->
+      <div class="process-left-vignette"></div>
+      <!-- Bottom fade -->
+      <div class="process-bottom-fade"></div>
+    </div>
+
+    <!-- ── LEFT: text panel (in front) ── -->
+    <div class="process-left">
+      <span class="process-eyebrow">Proceso</span>
+
+      <div class="process-text-stage">
+        {[
+          {
+            num: '01',
+            title: 'Estructura',
+            body: 'Calculamos y optimizamos cada elemento estructural bajo normativa estricta. El diseño es el fundamento de todo lo que construimos.'
+          },
+          {
+            num: '02',
+            title: 'Precisión',
+            body: 'Modelamos digitalmente cada pieza antes de fabricarla. El BIM garantiza que lo diseñado sea exactamente lo que se construye.'
+          },
+          {
+            num: '03',
+            title: 'Ejecución',
+            body: 'Fabricamos, transportamos y montamos con equipos especializados. Cada obra es una demostración de excelencia técnica.'
+          },
+          {
+            num: '04',
+            title: 'Resultado',
+            body: 'Infraestructura de alto desempeño que perdura. Proyectos que reflejan la precisión de quienes los construyeron.'
+          }
+        ].map((s, i) => (
+          <div class="process-slide" data-slide={i}>
+            <span class="process-num">{s.num}</span>
+            <h2 class="process-title">{s.title}</h2>
+            <p class="process-body">{s.body}</p>
+          </div>
+        ))}
+      </div>
+
+      <!-- Progress line -->
+      <div class="process-progress-track">
+        <div class="process-progress-fill" id="proc-progress"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  /* ── Section: 400vh scroll space ── */
+  .process-section {
+    height: 400vh;
+    background: var(--color-bg);
+  }
+
+  /* ── Sticky container ── */
+  .process-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* ── RIGHT: image layer ── */
+  .process-right {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .process-img-wrap {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    will-change: opacity, transform;
+  }
+  .process-img-wrap[data-img="0"] { opacity: 1; }
+
+  .process-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    will-change: transform;
+    transform: scale(1.06) translateX(20px);
+  }
+  .process-img-wrap[data-img="0"] .process-img {
+    transform: scale(1) translateX(0);
+  }
+
+  /* Dramatic left vignette — depth between text + image */
+  .process-left-vignette {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to right,
+      rgba(10,10,10,0.92) 0%,
+      rgba(10,10,10,0.55) 38%,
+      transparent 100%
+    );
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .process-bottom-fade {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30%;
+    background: linear-gradient(to top, var(--color-bg) 0%, transparent 100%);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  /* ── LEFT: text panel ── */
+  .process-left {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 clamp(2rem, 5vw, 5.5rem);
+    background: transparent;
+  }
+
+  .process-eyebrow {
+    display: block;
+    font-size: 0.625rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: 2.5rem;
+  }
+
+  /* ── Text stage: stacked, GSAP drives opacity/transform ── */
+  .process-text-stage {
+    position: relative;
+    min-height: 280px;
+  }
+
+  .process-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    will-change: opacity, transform;
+    pointer-events: none;
+  }
+  .process-slide[data-slide="0"] { opacity: 1; }
+
+  .process-num {
+    display: block;
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+    margin-bottom: 1rem;
+  }
+
+  .process-title {
+    font-family: var(--font-heading);
+    font-size: var(--text-process);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 0.92;
+    color: #fff;
+    margin-bottom: 1.75rem;
+  }
+
+  .process-body {
+    font-size: 1.0625rem;
+    font-weight: 300;
+    line-height: 1.72;
+    color: rgba(255,255,255,0.62);
+    max-width: 420px;
+  }
+
+  /* ── Progress bar ── */
+  .process-progress-track {
+    width: 100%;
+    max-width: 360px;
+    height: 1px;
+    background: rgba(255,255,255,0.07);
+    margin-top: 3rem;
+    overflow: hidden;
+  }
+
+  .process-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--color-primary);
+    transform-origin: left;
+    will-change: width;
+  }
+
+  /* ── Mobile: unstack ── */
+  @media (max-width: 1023px) {
+    .process-section { height: auto; }
+    .process-sticky {
+      position: relative;
+      height: auto;
+      grid-template-columns: 1fr;
+    }
+    .process-right { height: 55vw; min-height: 300px; }
+    .process-img-wrap { position: absolute; opacity: 0; }
+    .process-img-wrap[data-img="0"] { opacity: 1; }
+    .process-img { transform: none !important; }
+    .process-text-stage { position: relative; min-height: auto; }
+    .process-slide {
+      position: relative;
+      opacity: 1 !important;
+      transform: none !important;
+      pointer-events: auto;
+      margin-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding-bottom: 3rem;
+    }
+    .process-slide:last-child { border: none; }
+    .process-left-vignette { display: none; }
+  }
+</style>
+
+<script>
+  import gsap from 'gsap';
+  import ScrollTrigger from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+
+  const isMobile = window.innerWidth < 1024;
+  if (isMobile) {
+    // Mobile: nothing to do — CSS handles it
+  } else {
+
+    const section  = document.getElementById('process-section')!;
+    const sticky   = document.getElementById('process-sticky')!;
+    const slides   = gsap.utils.toArray<HTMLElement>('.process-slide');
+    const imgWraps = gsap.utils.toArray<HTMLElement>('.process-img-wrap');
+    const imgs     = imgWraps.map(w => w.querySelector<HTMLElement>('.process-img')!);
+    const progress = document.getElementById('proc-progress')!;
+    const STEPS    = slides.length; // 4
+    const STEP     = 1 / STEPS;    // 0.25
+
+    // ── Master timeline (paused, driven by ScrollTrigger) ──
+    const master = gsap.timeline({ paused: true });
+
+    slides.forEach((slide, i) => {
+      const imgWrap  = imgWraps[i];
+      const img      = imgs[i];
+      const prevSlide   = i > 0 ? slides[i - 1]   : null;
+      const prevWrap    = i > 0 ? imgWraps[i - 1] : null;
+
+      const tStart = i * STEP;       // when this step's transition begins
+      const tMid   = tStart + STEP * 0.38; // when new content appears
+
+      // ─── Phase 1: EXIT previous ───────────────────────────
+      if (prevSlide) {
+        // Prev slide: title fades up, body fades faster
+        master.to(prevSlide.querySelector('.process-num')!, {
+          opacity: 0, y: -10, duration: STEP * 0.32, ease: 'power2.in'
+        }, tStart);
+        master.to(prevSlide.querySelector('.process-title')!, {
+          opacity: 0, y: -20, duration: STEP * 0.35, ease: 'power2.in'
+        }, tStart + STEP * 0.02);
+        master.to(prevSlide.querySelector('.process-body')!, {
+          opacity: 0, y: -12, duration: STEP * 0.28, ease: 'power2.in'
+        }, tStart);
+      }
+      if (prevWrap) {
+        // Prev image: fade out, slight scale in
+        master.to(prevWrap, {
+          opacity: 0, duration: STEP * 0.5, ease: 'power2.inOut'
+        }, tStart);
+        master.to(prevWrap.querySelector('.process-img')!, {
+          scale: 1.08, x: -15, duration: STEP * 0.5, ease: 'power2.in'
+        }, tStart);
+      }
+
+      // ─── Phase 2: ENTER current ───────────────────────────
+      // Image appears first with cinematic scale+slide
+      master.fromTo(imgWrap,
+        { opacity: i === 0 ? 1 : 0 },
+        { opacity: 1, duration: STEP * 0.55, ease: 'power2.inOut' },
+        i === 0 ? 0 : tStart + STEP * 0.08
+      );
+      master.fromTo(img,
+        { scale: i === 0 ? 1 : 1.06, x: i === 0 ? 0 : 20 },
+        { scale: 1, x: 0, duration: STEP * 0.65, ease: 'power3.out' },
+        i === 0 ? 0 : tStart + STEP * 0.08
+      );
+
+      // Number: slight delay after image
+      master.fromTo(slide.querySelector('.process-num')!,
+        { opacity: 0, y: 12 },
+        { opacity: 0.3, y: 0, duration: STEP * 0.32, ease: 'power3.out' },
+        i === 0 ? 0 : tMid
+      );
+
+      // Title: stagger after image (cinematic reveal)
+      master.fromTo(slide.querySelector('.process-title')!,
+        { opacity: i === 0 ? 1 : 0, y: i === 0 ? 0 : 40 },
+        { opacity: 1, y: 0, duration: STEP * 0.4, ease: 'power3.out' },
+        i === 0 ? 0 : tMid + STEP * 0.04
+      );
+
+      // Body: last in
+      master.fromTo(slide.querySelector('.process-body')!,
+        { opacity: i === 0 ? 1 : 0, y: i === 0 ? 0 : 20 },
+        { opacity: 1, y: 0, duration: STEP * 0.38, ease: 'power3.out' },
+        i === 0 ? 0 : tMid + STEP * 0.10
+      );
+
+      // Subtle parallax on active image across its window
+      master.to(img, {
+        yPercent: -4, ease: 'none', duration: STEP
+      }, tStart);
+    });
+
+    // ─── ScrollTrigger ─────────────────────────────────────
+    ScrollTrigger.create({
+      trigger: section,
+      start:  'top top',
+      end:    'bottom bottom',
+      scrub:  1.2,
+      pin:    sticky,
+      pinSpacing: false,
+      onUpdate: (self) => {
+        master.progress(self.progress);
+        progress.style.width = `${self.progress * 100}%`;
+      }
+    });
+  }
+</script>

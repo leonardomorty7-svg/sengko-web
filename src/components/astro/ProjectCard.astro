@@ -1,0 +1,60 @@
+---
+import { urlFor } from '../../lib/sanity';
+
+interface Props {
+  project: {
+    slug: string;
+    title: string;
+    image?: any;
+    fallbackImage?: string;
+    city: string;
+    area: string;
+  };
+  featured?: boolean;
+}
+
+const { project, featured = false } = Astro.props;
+
+const imageSrc = project.image && project.image.asset
+  ? urlFor(project.image).width(featured ? 2400 : 1200).url()
+  : (project.fallbackImage || '/images/projects/parqueadero-01.jpg');
+---
+
+<a
+  href={`/proyectos/${project.slug}`}
+  class:list={[
+    "project-card block group relative overflow-hidden bg-zinc-900",
+    featured ? "h-[80vh]" : "aspect-[3/4]"
+  ]}
+>
+  <!-- Full-color image with hover scale -->
+  <img
+    src={imageSrc}
+    alt={project.title}
+    class="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-105"
+  />
+
+  <!-- Gradient for text legibility — not to desaturate -->
+  <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+
+  <!-- Content overlay -->
+  <div class="absolute inset-0 z-10 p-8 md:p-10 flex flex-col justify-end">
+    <span class="section-label text-[var(--color-primary)] mb-4">{project.area}</span>
+    <h3 class:list={[
+      "text-white font-medium tracking-tight leading-tight mb-3",
+      featured ? "text-4xl md:text-5xl max-w-[18ch]" : "text-2xl md:text-3xl max-w-[16ch]"
+    ]}>
+      {project.title}
+    </h3>
+    <div class="flex items-center gap-3 opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0 transition-all duration-500">
+      <span class="text-white/50 text-[9px] font-normal uppercase tracking-[0.12em]">{project.city}</span>
+      <span class="w-px h-3 bg-white/20"></span>
+      <span class="text-white/50 text-[9px] font-normal uppercase tracking-[0.12em]">Industrial</span>
+    </div>
+  </div>
+
+  <!-- Arrow indicator on hover -->
+  <div class="absolute top-8 right-8 z-10 w-8 h-8 border border-white/0 group-hover:border-white/30 flex items-center justify-center transition-all duration-500">
+    <svg class="opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-white" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+  </div>
+</a>

@@ -1,0 +1,53 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  index: number;
+  image?: string;
+}
+
+const { title, description, index, image } = Astro.props;
+const isEven = index % 2 === 0;
+---
+
+<div class="service-card group grid md:grid-cols-2 min-h-[420px] bg-white border border-black/6 overflow-hidden">
+  <!-- Image panel -->
+  <div class:list={["relative overflow-hidden min-h-[280px] md:min-h-0", isEven ? "order-last md:order-last" : "order-last md:order-first"]}>
+    {image ? (
+      <img
+        src={image}
+        alt={title}
+        class="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-105"
+      />
+    ) : (
+      <div class="absolute inset-0 bg-zinc-100 flex items-center justify-center">
+        <span class="text-zinc-300 text-sm tracking-widest uppercase">Imagen</span>
+      </div>
+    )}
+    <!-- Subtle edge gradient to blend into content panel -->
+    <div class:list={[
+      "absolute inset-0",
+      isEven
+        ? "bg-gradient-to-r from-white via-transparent to-transparent hidden md:block"
+        : "bg-gradient-to-l from-white via-transparent to-transparent hidden md:block"
+    ]}></div>
+  </div>
+
+  <!-- Content panel -->
+  <div class="flex flex-col justify-center px-10 py-14 md:px-14 md:py-16">
+    <span class="text-[9px] font-medium tracking-[0.16em] uppercase text-black/30 mb-6">
+      Capacidad 0{index + 1}
+    </span>
+    <span class="accent-rule"></span>
+    <h3 class="text-[var(--color-text-dark)] text-2xl md:text-3xl font-medium tracking-tight leading-tight mb-5 max-w-[20ch]">
+      {title}
+    </h3>
+    <p class="text-[var(--color-text-muted-dark)] text-base leading-relaxed mb-8 max-w-[42ch]">
+      {description}
+    </p>
+    <div class="flex items-center gap-3 text-[var(--color-primary)] group-hover:gap-5 transition-all duration-500">
+      <span class="text-[9px] font-medium tracking-[0.14em] uppercase">Ver especificación</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </div>
+  </div>
+</div>
