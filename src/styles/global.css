@@ -87,7 +87,7 @@
     @apply py-28 md:py-40;
   }
 
-  /* Section label — accent-colored, uppercase */
+  /* Section label - accent-colored, uppercase */
   .section-label {
     display: block;
     font-size: 0.625rem;
@@ -102,7 +102,7 @@
     color: rgba(0,0,0,0.35);
   }
 
-  /* Reveal animation — GSAP drives these, CSS sets start state */
+  /* Reveal animation - GSAP drives these, CSS sets start state */
   .reveal {
     opacity: 0;
     transform: translateY(28px);
