@@ -10,44 +10,64 @@ const { title, description, index, image } = Astro.props;
 const isEven = index % 2 === 0;
 ---
 
-<div class="service-card group grid md:grid-cols-2 min-h-[420px] bg-white border border-black/6 overflow-hidden">
+<div class="group grid md:grid-cols-12 gap-12 md:gap-16 lg:gap-24 items-center">
   <!-- Image panel -->
-  <div class:list={["relative overflow-hidden min-h-[280px] md:min-h-0", isEven ? "order-last md:order-last" : "order-last md:order-first"]}>
+  <div class:list={[
+    "relative overflow-hidden aspect-[4/5] md:aspect-[3/4] bg-[#f8f7f5]",
+    isEven ? "md:col-span-7 md:col-start-6 order-last md:order-last" : "md:col-span-7 md:col-start-1 order-last md:order-first"
+  ]}>
     {image ? (
-      <img
-        src={image}
-        alt={title}
-        class="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-105"
-      />
+      <>
+        <div class="absolute inset-0 bg-black/20 z-10 mix-blend-multiply transition-opacity duration-700 group-hover:opacity-0"></div>
+        <img
+          src={image}
+          alt={title}
+          class="absolute inset-0 w-full h-full object-cover grayscale-[20%] contrast-125 brightness-[0.85] transition-transform duration-[3s] ease-out group-hover:scale-105"
+        />
+        <!-- Subtle cinematic shadow integration -->
+        <div class="absolute inset-0 z-20 pointer-events-none cinematic-shadow"></div>
+      </>
     ) : (
-      <div class="absolute inset-0 bg-zinc-100 flex items-center justify-center">
-        <span class="text-zinc-300 text-sm tracking-widest uppercase">Imagen</span>
+      <div class="absolute inset-0 flex items-center justify-center">
+        <span class="text-black/10 text-[9px] tracking-[0.25em] uppercase">Materia</span>
       </div>
     )}
-    <!-- Subtle edge gradient to blend into content panel -->
-    <div class:list={[
-      "absolute inset-0",
-      isEven
-        ? "bg-gradient-to-r from-white via-transparent to-transparent hidden md:block"
-        : "bg-gradient-to-l from-white via-transparent to-transparent hidden md:block"
-    ]}></div>
   </div>
 
   <!-- Content panel -->
-  <div class="flex flex-col justify-center px-10 py-14 md:px-14 md:py-16">
-    <span class="text-[9px] font-medium tracking-[0.16em] uppercase text-black/30 mb-6">
-      Capacidad 0{index + 1}
+  <div class:list={[
+    "flex flex-col justify-center",
+    isEven ? "md:col-span-4 md:col-start-1 md:row-start-1" : "md:col-span-4 md:col-start-9"
+  ]}>
+    <span class="text-[9px] font-medium tracking-[0.2em] uppercase text-black/30 mb-8 block">
+      0{index + 1} // Capacidad
     </span>
-    <span class="accent-rule"></span>
-    <h3 class="text-[var(--color-text-dark)] text-2xl md:text-3xl font-medium tracking-tight leading-tight mb-5 max-w-[20ch]">
+    
+    <h3 class="text-[var(--color-text-dark)] text-3xl md:text-[clamp(32px,3.5vw,48px)] font-medium tracking-[-0.02em] leading-[1.05] mb-8">
       {title}
     </h3>
-    <p class="text-[var(--color-text-muted-dark)] text-base leading-relaxed mb-8 max-w-[42ch]">
+    
+    <div class="w-8 h-px bg-black/20 mb-8 transition-all duration-700 group-hover:w-16"></div>
+    
+    <p class="text-[var(--color-text-muted-dark)] text-sm md:text-base font-light leading-[1.8] mb-12 max-w-[40ch]">
       {description}
     </p>
-    <div class="flex items-center gap-3 text-[var(--color-primary)] group-hover:gap-5 transition-all duration-500">
-      <span class="text-[9px] font-medium tracking-[0.14em] uppercase">Ver especificación</span>
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    
+    <div class="flex items-center gap-4 text-black group-hover:text-black/50 transition-colors duration-500 cursor-pointer w-fit">
+      <span class="text-[9px] font-semibold tracking-[0.2em] uppercase">Explorar proceso</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="transform transition-transform duration-500 group-hover:translate-x-2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
     </div>
   </div>
 </div>
+
+<style>
+  .cinematic-shadow {
+    box-shadow: inset 0 0 80px 10px rgba(0,0,0,0.3);
+  }
+  
+  @media (max-width: 768px) {
+    .cinematic-shadow {
+      box-shadow: inset 0 0 50px 5px rgba(0,0,0,0.3);
+    }
+  }
+</style>

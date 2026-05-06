@@ -66,9 +66,9 @@ const projects = [
 
 const services = await getServices();
 const serviceImages = [
-  '/images/services/bim-model.jpg',
-  '/images/services/welding',
-  '/images/services/inspection.jpg',
+  '/images/services/structural-design.jpg',
+  '/images/services/bim-modeling.jpg',
+  '/images/services/metal-fabrication.jpg',
 ];
 ---
 
@@ -92,14 +92,6 @@ const serviceImages = [
           <!-- Editorial gradient overlay -->
           <div class="absolute inset-0 z-10 bg-gradient-to-r from-black/95 via-black/60 to-transparent"></div>
           
-          <!-- Final Resolution Layer (Astro Rendering Fix) -->
-          <div id="hero-resolution-bg" class="absolute inset-0 z-25 opacity-0 bg-black overflow-hidden">
-            <!-- TEXTURE (INLINE STYLE - MUST BE VALID HTML STRING) -->
-            <div style="position:absolute;inset:0;background-image:url('/images/metal-texture-dark.jpg');background-size:cover;background-position:center;background-repeat:no-repeat;opacity:0.4;filter:grayscale(100%) contrast(110%) brightness(100%);mix-blend-mode:normal;z-index:1;pointer-events:none;"></div>
-
-            <!-- LIGHT OVERLAY (FOR LEGIBILITY ONLY) -->
-            <div style="position:absolute;inset:0;background:rgba(0,0,0,0.4);z-index:2;pointer-events:none;"></div>
-          </div>
         </div>
 
         <!-- Content Layer -->
@@ -134,19 +126,14 @@ const serviceImages = [
             </div>
           </div>
           
-          <!-- Resolution Statement (Cinematic Ending) -->
-          <div id="hero-resolution-text" class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0">
-            <h2 class="resolution-title">
-              PRECISIÓN QUE<br/>
-              <span class="whitespace-nowrap">DEFINE ESTRUCTURAS.</span>
-            </h2>
-          </div>
         </div>
 
         <!-- Scroll indicator -->
-        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 opacity-30" id="hero-scroll-indicator">
-          <span class="text-[8px] tracking-[0.25em] uppercase text-white font-medium">Scroll</span>
-          <div class="w-px h-10 bg-white scroll-line"></div>
+        <div class="absolute bottom-12 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-4 opacity-80" id="hero-scroll-indicator">
+          <span class="text-[9px] tracking-[0.35em] uppercase text-white font-medium drop-shadow-md">Scroll</span>
+          <div class="w-[1px] h-14 bg-white/20 relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1/2 bg-white animate-scroll-drop shadow-[0_0_5px_rgba(255,255,255,0.8)]"></div>
+          </div>
         </div>
       </div>
     </section>
@@ -155,39 +142,54 @@ const serviceImages = [
     <!-- ─────────────────────────────────────────── -->
     <!--  2. INTRO — light, text clarity, numbers    -->
     <!-- ─────────────────────────────────────────── -->
-    <section class="bg-[var(--color-bg-light)] text-[var(--color-text-dark)] py-28 md:py-36">
-      <div class="container-custom">
+    <section class="editorial-refinement bg-[#eae8e3] text-[var(--color-text-dark)] pt-40 pb-32 md:pt-56 md:pb-48 relative overflow-hidden">
+      <!-- Background Texture Layer -->
+      <div class="absolute inset-0 pointer-events-none opacity-[0.02] mix-blend-multiply bg-noise"></div>
 
-        <!-- Editorial text block -->
-        <div class="grid lg:grid-cols-12 gap-16 items-start mb-28">
-          <div class="lg:col-span-5 reveal">
-            <span class="section-label section-label--dark">Sobre SENGKO</span>
-            <h2 class="text-4xl md:text-5xl font-medium tracking-tight leading-[1.08] max-w-[14ch]">
-              Estructura.<br/>Precisión.<br/>Ejecución.
+      <div class="container-custom relative z-10">
+        <!-- Editorial Header System -->
+        <div class="grid lg:grid-cols-12 gap-16 lg:gap-24 items-start mb-40">
+          <div class="lg:col-span-6 reveal">
+            <span class="text-[10px] font-medium uppercase tracking-[0.2em] text-black/40 block mb-16">Sobre SENGKO</span>
+            <h2 class="text-[clamp(48px,9vw,110px)] font-medium tracking-[-0.04em] leading-[0.95] uppercase mb-8">
+              Estructura.<br/>
+              Precisión.<br/>
+              <span class="text-black/30">Ejecución.</span>
             </h2>
           </div>
-          <div class="lg:col-span-7 lg:pt-4 flex flex-col justify-start gap-8 reveal delay-2">
-            <p class="text-[var(--color-text-muted-dark)] text-lg leading-relaxed max-w-[52ch]">
-              Somos una empresa especializada en la integración total de procesos: desde el cálculo estructural y modelado BIM hasta la fabricación técnica y el montaje especializado en obra.
+          <div class="lg:col-span-5 lg:col-start-8 lg:pt-32 flex flex-col gap-12 reveal delay-2">
+            <p class="text-xl md:text-2xl font-light leading-[1.6] text-[var(--color-text-dark)] tracking-[-0.01em] max-w-[38ch]">
+              Especialistas en la integración total de procesos: desde el cálculo y modelado BIM hasta la fabricación y el montaje especializado.
             </p>
-            <p class="text-[var(--color-text-muted-dark)] text-lg leading-relaxed max-w-[52ch]">
-              Nuestra metodología garantiza precisión dimensional, optimización de materiales y cumplimiento riguroso de normativas internacionales.
+            <div class="accent-rule mb-0 opacity-80"></div>
+            <p class="text-base md:text-lg text-[var(--color-text-muted-dark)] leading-[1.8] font-light max-w-[40ch]">
+              Nuestra metodología garantiza precisión dimensional, optimización de recursos y cumplimiento riguroso de estándares internacionales en cada obra.
             </p>
           </div>
         </div>
 
-        <!-- Stats row -->
-        <div class="border-t border-black/8 pt-16 grid grid-cols-2 md:grid-cols-4 gap-10">
+        <!-- Integrated Architectural Stats -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-12 gap-y-16 border-t border-black/10 pt-16 md:pt-24">
           {[
             { n: '+250', label: 'Proyectos', desc: 'Infraestructura industrial ejecutada' },
             { n: '+15k', label: 'Toneladas', desc: 'Acero fabricado bajo norma' },
             { n: '20+',  label: 'Años',      desc: 'De especialidad técnica' },
             { n: '12',   label: 'Sectores',  desc: 'Atendidos a nivel nacional' },
           ].map((s, i) => (
-            <div class:list={["reveal", i > 0 && `delay-${i}`]}>
-              <p class="text-5xl md:text-6xl font-medium text-[var(--color-text-dark)] tracking-tight mb-1 tabular-nums">{s.n}</p>
-              <span class="section-label section-label--dark mb-2">{s.label}</span>
-              <p class="text-sm text-[var(--color-text-muted-dark)] font-light leading-snug max-w-[20ch]">{s.desc}</p>
+            <div class:list={["reveal", `delay-${i + 1}`]}>
+              <div class="flex flex-col gap-5">
+                <span class="text-5xl md:text-[5.5rem] font-light tracking-[-0.04em] text-black leading-none tabular-nums">
+                  {s.n}
+                </span>
+                <div class="space-y-3 max-w-[18ch]">
+                  <span class="text-[10px] font-medium uppercase tracking-[0.15em] text-[var(--color-primary-soft)] block">
+                    {s.label}
+                  </span>
+                  <p class="text-[13px] md:text-sm text-black/60 leading-[1.6] font-light">
+                    {s.desc}
+                  </p>
+                </div>
+              </div>
             </div>
           ))}
         </div>
@@ -237,29 +239,51 @@ const serviceImages = [
     </section>
 
 
-    <!-- ─────────────────────────────────────────── -->
-    <!--  EDITORIAL PAUSE — cinematic breathing space -->
-    <!-- ─────────────────────────────────────────── -->
-    <section id="editorial-pause" class="relative flex items-center justify-center bg-[var(--color-bg)] overflow-hidden" style="height:100vh;">
-      <p id="pause-phrase" class="editorial-pause-text">
-        Precisión no es<br/>una opción.
-      </p>
-    </section>
 
 
     <!-- ─────────────────────────────────────────── -->
     <!--  4. PORTFOLIO NARRATIVE — Cinematic Split System -->
     <!-- ─────────────────────────────────────────── -->
     <section id="proyectos" class="bg-black relative">
-      <!-- Section Intro -->
-      <div class="container-custom py-24 border-t border-white/5">
-        <span class="section-label mb-6">Portafolio</span>
-        <h2 class="text-4xl md:text-6xl font-medium tracking-tight leading-[1.05] max-w-[15ch]">
-          Infraestructura de alto impacto ejecutada.
-        </h2>
-      </div>
 
-      <div id="projects-story-container" class="relative bg-black w-full" style={`height: ${projects.length * 100}vh;`}>
+      <!-- CINEMATIC PORTFOLIO INTRO -->
+      <div class="relative flex items-end justify-center overflow-hidden" style="min-height: 80vh; padding-bottom: 8vh;">
+        <!-- Static industrial background -->
+        <div class="absolute inset-0 z-0">
+          <img
+            src="/projects/postobon-01.jpg"
+            alt=""
+            aria-hidden="true"
+            class="w-full h-full object-cover"
+            style="filter: brightness(0.1) contrast(1.15) grayscale(1);"
+          />
+          <div class="absolute inset-0" style="background: linear-gradient(to bottom, #0A0A0A 0%, transparent 20%, transparent 55%, #0A0A0A 85%, #0A0A0A 100%);"></div>
+          <div class="absolute inset-0 bg-black/50"></div>
+        </div>
+
+        <!-- Content — bottom-anchored for narrative handoff feel -->
+        <div class="container-custom relative z-10 px-6" style="padding-top: 10vh;">
+          <span class="section-label mb-10 block" style="color: var(--color-primary);">Portafolio</span>
+          <h2 style="
+            font-family: var(--font-heading);
+            font-size: clamp(44px, 9.5vw, 136px);
+            font-weight: 500;
+            line-height: 0.88;
+            letter-spacing: -0.04em;
+            text-transform: uppercase;
+            color: #fff;
+            margin: 0;
+          ">
+            <span style="display: block; white-space: nowrap;">Infraestructura</span>
+            <span style="display: block; white-space: nowrap; color: var(--color-primary);">de alto impacto</span>
+            <span style="display: block; white-space: nowrap;">ejecutada.</span>
+          </h2>
+        </div>
+      </div>
+      <!-- END CINEMATIC PORTFOLIO INTRO -->
+
+
+      <div id="projects-story-container" class="relative bg-black w-full" style={`height: ${projects.length * 100}vh; margin-top: -22vh; position: relative; z-index: 2;`}>
         <div class="projects-story-inner sticky top-0 h-screen w-full overflow-hidden hidden lg:grid lg:grid-cols-[30%_70%]">
           
           <!-- LEFT SIDE: TEXT (30%) -->
@@ -292,7 +316,7 @@ const serviceImages = [
           <div class="projects-image-wrapper relative bg-black h-full overflow-hidden">
             {projects.map((p, i) => (
               <img 
-                src={p.image} 
+                src={p.image || p.fallbackImage} 
                 alt={p.title}
                 class="project-story-img absolute inset-0 w-full h-full object-cover brightness-90 contrast-110 opacity-0 transform scale-[1.05]"
                 style="will-change: transform, opacity;"
@@ -308,7 +332,7 @@ const serviceImages = [
           {projects.map((p) => (
             <div class="flex flex-col gap-8">
               <div class="aspect-[16/10] overflow-hidden">
-                <img src={p.image} alt={p.title} class="w-full h-full object-cover" />
+                <img src={p.image || p.fallbackImage} alt={p.title} class="w-full h-full object-cover" />
               </div>
               <div>
                 <span class="text-[var(--color-primary)] text-[10px] tracking-[0.25em] font-medium uppercase mb-4 block">{p.category}</span>
@@ -334,22 +358,22 @@ const serviceImages = [
     <!-- ─────────────────────────────────────────── -->
     <!--  6. SERVICES — light section, visual relief -->
     <!-- ─────────────────────────────────────────── -->
-    <section id="servicios" class="bg-[var(--color-bg-light)] text-[var(--color-text-dark)] py-28 md:py-40">
-      <div class="container-custom mb-16">
-        <div class="grid md:grid-cols-2 gap-10 items-end reveal">
+    <section id="servicios" class="relative z-50 bg-white text-[var(--color-text-dark)] py-28 md:py-40" style="isolation: isolate;">
+      <div class="container-custom mb-32 md:mb-40">
+        <div class="grid md:grid-cols-2 gap-12 md:gap-20 items-end reveal">
           <div>
-            <span class="section-label section-label--dark">Capacidades</span>
-            <h2 class="text-4xl md:text-5xl font-medium tracking-tight leading-tight max-w-[18ch]">
+            <span class="section-label section-label--dark mb-10">Capacidades</span>
+            <h2 class="text-4xl md:text-[clamp(48px,5vw,72px)] font-medium tracking-[-0.03em] leading-[1.05] max-w-[15ch]">
               Ingeniería integral, de principio a fin.
             </h2>
           </div>
-          <p class="text-[var(--color-text-muted-dark)] text-base leading-relaxed max-w-[48ch] reveal delay-2 md:self-end">
-            Cada capacidad está diseñada para funcionar en conjunto, garantizando coherencia técnica en toda la cadena del proyecto.
+          <p class="text-[var(--color-text-muted-dark)] text-lg font-light leading-[1.8] max-w-[42ch] reveal delay-2 md:self-end pb-2">
+            Cada capacidad está diseñada para funcionar en conjunto, garantizando coherencia técnica y precisión dimensional en toda la cadena del proyecto.
           </p>
         </div>
       </div>
 
-      <div class="container-custom space-y-3">
+      <div class="container-custom space-y-32 md:space-y-48">
         {services.slice(0, 3).map((service, i) => (
           <div class:list={["reveal", i > 0 && `delay-${i}`]}>
             <ServiceCard
@@ -364,29 +388,35 @@ const serviceImages = [
     </section>
 
 
-    <!-- ─────────────────────────────────────────── -->
-    <!--  7. CTA — dark closing, narrative conclusion-->
-    <!-- ─────────────────────────────────────────── -->
-    <section id="contacto" class="relative min-h-[70vh] flex items-center justify-start overflow-hidden bg-[var(--color-bg)]">
-      <!-- Background: full-color image, darker overlay -->
-      <div class="absolute inset-0 z-0">
-        <img
-          src="/images/projects/edificio-01.jpg"
-          alt="Contacto SENGKO"
-          class="w-full h-full object-cover brightness-50 contrast-110"
-        />
-        <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-transparent"></div>
-        <div class="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-[var(--color-bg)] to-transparent"></div>
-      </div>
+  </main>
 
+  <!-- ─────────────────────────────────────────── -->
+  <!--  7. CINEMATIC OUTRO & FOOTER                -->
+  <!-- ─────────────────────────────────────────── -->
+  <div id="outro-section" class="relative bg-black overflow-hidden flex flex-col justify-between min-h-[90vh]">
+    
+    <!-- Shared Cinematic Background -->
+    <div class="absolute inset-0 z-0">
+      <img
+        src="/images/projects/edificio-01.jpg"
+        alt="Contacto SENGKO"
+        class="cinematic-outro-img absolute inset-0 w-full h-full object-cover grayscale-[30%] contrast-125 brightness-50"
+      />
+      <!-- Overlays for legibility: Darker at bottom for footer, gradient on left for CTA -->
+      <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-transparent"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+      <div class="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white to-transparent opacity-5"></div>
+    </div>
+
+    <section id="contacto" class="relative z-10 flex-grow flex items-center justify-start">
       <!-- Left-aligned content — mirrors hero -->
-      <div class="container-custom relative z-10 py-32">
+      <div class="container-custom py-32 w-full">
         <div class="max-w-[560px]">
           <span class="section-label reveal">Siguiente Paso</span>
-          <h2 class="text-4xl md:text-[clamp(40px,5vw,72px)] font-medium tracking-tight leading-[1.05] mb-8 reveal delay-1">
+          <h2 class="text-4xl md:text-[clamp(48px,5vw,72px)] font-medium tracking-[-0.02em] leading-[1.05] mb-8 reveal delay-1">
             Hablemos sobre su próximo <span class="text-[var(--color-primary)]">desafío estructural.</span>
           </h2>
-          <p class="text-white/55 text-base leading-relaxed mb-12 max-w-[42ch] reveal delay-2">
+          <p class="text-white/60 text-lg font-light leading-[1.8] mb-12 max-w-[42ch] reveal delay-2">
             Analizamos sus requerimientos técnicos y desarrollamos infraestructura de alto desempeño adaptada a cada proyecto.
           </p>
           <div class="flex flex-wrap gap-4 reveal delay-3">
@@ -407,10 +437,8 @@ const serviceImages = [
       </div>
     </section>
 
-  </main>
-
-  <!-- Footer -->
-  <footer class="bg-[var(--color-bg)] border-t border-white/5 py-16">
+    <!-- Integrated Footer -->
+    <footer class="relative z-10 border-t border-white/10 py-12 mt-auto bg-transparent">
     <div class="container-custom">
       <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
         <div>
@@ -426,6 +454,7 @@ const serviceImages = [
       </div>
     </div>
   </footer>
+  </div> <!-- End outro-section -->
 
 </BaseLayout>
 
@@ -435,6 +464,26 @@ const serviceImages = [
   import ScrollTrigger from 'gsap/ScrollTrigger';
 
   gsap.registerPlugin(ScrollTrigger);
+
+  // ── Cinematic Outro Parallax ──────────────────────────────────
+  const outroSection = document.getElementById('outro-section');
+  const outroImg = document.querySelector('.cinematic-outro-img');
+  
+  if (outroSection && outroImg) {
+    gsap.fromTo(outroImg,
+      { scale: 1 },
+      {
+        scale: 1.05, // Very subtle, slow zoom
+        ease: 'none',
+        scrollTrigger: {
+          trigger: outroSection,
+          start: 'top bottom',
+          end: 'bottom bottom',
+          scrub: true
+        }
+      }
+    );
+  }
 
   // ── Reveal on scroll ────────────────────────────────────────
   // Map delay classes → seconds
@@ -461,7 +510,7 @@ const serviceImages = [
         ease: 'power3.out',
         scrollTrigger: {
           trigger: el,
-          start: 'top 88%',
+          start: el.closest('#servicios') ? 'top 65%' : 'top 88%',
           once: true
         }
       }
@@ -483,7 +532,7 @@ const serviceImages = [
       scrollTrigger: {
         trigger: heroSec,
         start: 'top top',
-        end: '+=2500',
+        end: '+=2000',
         scrub: 1.2,
         pin: true,
         pinSpacing: true,
@@ -519,28 +568,6 @@ const serviceImages = [
       // Meta Appearance (with State 3)
       .to(heroMeta, { opacity: 1, y: 0, duration: 0.2 }, 0.6)
       
-      // ─── FINAL RESOLUTION FRAME (Last segment) ───
-      // Fade out EVERYTHING from the previous scenes
-      .to('.hero-content-narrative, #hero-image, #hero-scroll-indicator', {
-        opacity: 0, 
-        y: -30,
-        duration: 0.15,
-        ease: 'power2.inOut'
-      }, 0.75)
-      
-      // Bring in the resolution background
-      .to('#hero-resolution-bg', { 
-        opacity: 1, 
-        duration: 0.15,
-        ease: 'power2.inOut'
-      }, 0.73)
-      
-      // Final Statement Reveal
-      .fromTo('#hero-resolution-text', 
-        { opacity: 0, y: 40, scale: 0.98 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.2, ease: 'power3.out' },
-        0.8
-      );
   }
 
 
@@ -555,7 +582,7 @@ const serviceImages = [
       scrollTrigger: {
         trigger: storyContainer,
         start: "top top",
-        end: () => "+=" + (images.length * 100) + "%",
+        end: () => "+=" + (images.length * 100 + 100) + "%",
         scrub: true,
         pin: true,
         anticipatePin: 1,
@@ -585,16 +612,18 @@ const serviceImages = [
         ease: "power2.out"
       }, "<");
 
-      // 2. HOLD (Stability)
-      tl.to({}, { duration: 0.6 });
+      // 2. HOLD (Stability) - last project stays much longer
+      tl.to({}, { duration: nextImage ? 0.6 : 4.0 });
 
       // 3. EXIT TEXT
-      tl.to(text, {
-        opacity: 0,
-        y: -20,
-        duration: 0.5,
-        ease: "power2.in"
-      });
+      if (nextImage) {
+        tl.to(text, {
+          opacity: 0,
+          y: -20,
+          duration: 0.5,
+          ease: "power2.in"
+        });
+      }
 
       // 4. TRANSITION TO NEXT
       if (nextImage) {
@@ -619,45 +648,23 @@ const serviceImages = [
   }
 
   // ── Scroll indicator fade ─────────────────────────────────────
-  const scrollLine = document.querySelector<HTMLElement>('.scroll-line');
-  if (scrollLine) {
+  const scrollIndicator = document.getElementById('hero-scroll-indicator');
+  if (scrollIndicator) {
     ScrollTrigger.create({
       trigger: document.body,
       start: '80px top',
-      onEnter:  () => gsap.to(scrollLine, { opacity: 0, duration: 0.5 }),
-      onLeaveBack: () => gsap.to(scrollLine, { opacity: 1, duration: 0.5 })
+      onEnter:  () => gsap.to(scrollIndicator, { opacity: 0, duration: 0.5 }),
+      onLeaveBack: () => gsap.to(scrollIndicator, { opacity: 1, duration: 0.5 })
     });
-  }
-  // ── Editorial pause: fade in then fade out ───────────────────
-  const pausePhrase = document.getElementById('pause-phrase');
-  const pauseSection = document.getElementById('editorial-pause');
-  if (pausePhrase && pauseSection) {
-    // start invisible
-    gsap.set(pausePhrase, { opacity: 0, y: 30 });
-    const pauseTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: pauseSection,
-        start: 'top 65%',
-        end: 'bottom 35%',
-        scrub: 1.4
-      }
-    });
-    pauseTl
-      .to(pausePhrase, { opacity: 1, y: 0, duration: 0.4, ease: 'power3.out' })
-      .to(pausePhrase, { opacity: 0, y: -30, duration: 0.35, ease: 'power2.in' }, '+=0.2');
   }
 </script>
 
 <style is:global>
   /* Scroll line animation */
-  .scroll-line {
-    animation: scroll-pulse 2s ease-in-out infinite;
-    transition: opacity 0.6s ease;
+  .bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   }
-  @keyframes scroll-pulse {
-    0%, 100% { transform: scaleY(1);   opacity: 0.5; }
-    50%       { transform: scaleY(0.4); opacity: 0.15; }
-  }
+
 
   /* Featured parallax: clip overflow */
   #featured-wrap { overflow: hidden; }
@@ -692,30 +699,6 @@ const serviceImages = [
     will-change: transform, opacity;
   }
 
-  /* Resolution Scene */
-  #hero-resolution-bg {
-    pointer-events: none;
-  }
-  
-  .resolution-title {
-    font-family: var(--font-heading);
-    font-size: clamp(40px, 6vw, 84px);
-    line-height: 1.0;
-    letter-spacing: -0.02em;
-    font-weight: 500;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.9);
-    text-align: center;
-    max-width: 25ch;
-    will-change: transform, opacity;
-  }
-
-  /* Surgical Texture System - Removed classes, using inline styles for persistence */
-
-  #hero-resolution-text {
-    position: relative;
-    z-index: 3;
-  }
 
   /* Mobile Fallback */
   @media (max-width: 1023px) {
@@ -725,28 +708,23 @@ const serviceImages = [
     .hero-text-container { height: auto; display: flex; flex-direction: column; }
     #hero-eyebrow, #hero-meta { opacity: 1 !important; }
     
-    .hero-state, #hero-resolution-text { 
+    .hero-state { 
       opacity: 1 !important; 
       transform: none !important; 
       position: relative !important;
       display: block !important;
     }
     .hero-state:not(#state-1) { margin-top: 1rem; }
-    #hero-resolution-text { margin-top: 3rem; }
     .resolution-title { text-align: left; }
   }
 
-  /* Editorial pause phrase */
-  .editorial-pause-text {
-    font-family: var(--font-heading);
-    font-size: var(--text-display);
-    font-weight: 500;
-    letter-spacing: -0.025em;
-    line-height: 1.0;
-    color: #fff;
-    text-align: center;
-    max-width: 14ch;
-    margin: 0 auto;
-    will-change: opacity, transform;
+  .animate-scroll-drop {
+    animation: scrollDrop 2s cubic-bezier(0.77, 0, 0.175, 1) infinite;
+  }
+  @keyframes scrollDrop {
+    0% { transform: translateY(-100%); opacity: 0; }
+    30% { opacity: 1; }
+    70% { transform: translateY(200%); opacity: 0; }
+    100% { transform: translateY(200%); opacity: 0; }
   }
 </style>
