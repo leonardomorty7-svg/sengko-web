@@ -424,7 +424,18 @@ const serviceImages = [
 
       <!-- Bottom Bar -->
       <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
-        <small class="text-white/30 font-normal tracking-wider text-[10px]">© {new Date().getFullYear()} {siteConfig.title}</small>
+        <small class="text-white/30 font-normal tracking-wider text-[10px] flex items-center flex-wrap justify-center md:justify-start gap-x-2 gap-y-1">
+          <span>© {new Date().getFullYear()} SENGKO</span>
+          <span class="hidden md:inline">|</span>
+          <span>Ingeniería y Soluciones Industriales</span>
+          <span class="hidden md:inline">|</span>
+          <span class="flex items-center gap-2">
+            Hecho con amor por 
+            <a href="https://qdigitalab.com/" target="_blank" rel="noopener noreferrer" class="inline-block transition-opacity hover:opacity-100 opacity-70">
+              <img src="/brands/quantum-logo.svg" alt="Quantum" class="h-[10px] w-auto brightness-0 invert opacity-80" />
+            </a>
+          </span>
+        </small>
         <div class="flex gap-6">
           <a href={siteConfig.social.linkedin} target="_blank" rel="noopener noreferrer" class="text-white/30 hover:text-white transition-colors text-[10px] tracking-wider uppercase">LinkedIn</a>
           <a href={siteConfig.social.twitter} target="_blank" rel="noopener noreferrer" class="text-white/30 hover:text-white transition-colors text-[10px] tracking-wider uppercase">Twitter</a>
