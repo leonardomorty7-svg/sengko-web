@@ -6,64 +6,7 @@ import ProjectCard from '../components/astro/ProjectCard.astro';
 import { siteConfig } from '../data/site-config';
 import ScrollNarrative from '../components/astro/ScrollNarrative.astro';
 
-const projects = [
-  {
-    title: "Postobón Malambo",
-    category: "ESTRUCTURA METÁLICA BODEGAS",
-    specs: "170 ton · 6360 m²",
-    location: "Malambo, Atlántico",
-    image: "/projects/postobon-01.jpg"
-  },
-  {
-    title: "Gonvarri",
-    category: "ESTRUCTURA METÁLICA BODEGAS",
-    specs: "17 ton · 600 m²",
-    location: "Itagüí, Antioquia",
-    image: "/projects/gonvarri-01.jpg"
-  },
-  {
-    title: "Cory",
-    category: "CUBIERTA METÁLICA",
-    specs: "27 ton · 450 m²",
-    location: "Medellín, Antioquia",
-    image: "/projects/cory-01.jpg"
-  },
-  {
-    title: "Mezanine Buenos Aires",
-    category: "BODEGA + MEZANINE",
-    specs: "15 ton · 400 m²",
-    location: "Medellín, Antioquia",
-    image: "/projects/mezanine-01.jpg"
-  },
-  {
-    title: "Bodega Textil",
-    category: "ESTRUCTURA METÁLICA",
-    specs: "23 ton · 540 m²",
-    location: "Bello, Antioquia",
-    image: "/projects/bodega-textil-01.jpg"
-  },
-  {
-    title: "Puente Peatonal Hatovial",
-    category: "INFRAESTRUCTURA",
-    specs: "78 m · 65 ton",
-    location: "Bello, Antioquia",
-    image: "/projects/puente-01.jpg"
-  },
-  {
-    title: "Teatro Gestos Mnemos",
-    category: "EDIFICACIÓN",
-    specs: "460 m² · 46 ton",
-    location: "Bello, Antioquia",
-    image: "/projects/edificio-01.jpg"
-  },
-  {
-    title: "Portello 19",
-    category: "BALCONES METÁLICOS",
-    specs: "27 ton",
-    location: "La Ceja, Antioquia",
-    image: "/projects/balcones-01.jpg"
-  }
-];
+import { projects } from '../data/projects';
 
 const services = await getServices();
 const serviceImages = [
@@ -308,6 +251,11 @@ const serviceImages = [
                       <span class="text-white/90 text-sm font-medium tracking-tight">{p.location}</span>
                     </div>
                   </div>
+                  <div class="mt-10 pointer-events-auto">
+                    <a href={`/proyectos/${p.slug}`} class="inline-block border border-white/20 text-white text-[9px] font-semibold tracking-[0.16em] uppercase px-8 py-4 hover:bg-white hover:text-black transition-all duration-400">
+                      Ver Proyecto
+                    </a>
+                  </div>
                 </div>
               </div>
             ))}
@@ -347,6 +295,11 @@ const serviceImages = [
                     <span class="text-white/30 text-[8px] uppercase tracking-wider block mb-1">Ubicación</span>
                     <span class="text-white/80 text-xs">{p.location}</span>
                   </div>
+                </div>
+                <div class="mt-6">
+                  <a href={`/proyectos/${p.slug}`} class="inline-block border border-white/20 text-white text-[9px] font-semibold tracking-[0.16em] uppercase px-8 py-4 hover:bg-white hover:text-black transition-all duration-400">
+                    Ver Proyecto
+                  </a>
                 </div>
               </div>
             </div>

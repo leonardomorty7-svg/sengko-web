@@ -1,0 +1,270 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { projects, type ProjectData } from '../../data/projects';
+
+export async function getStaticPaths() {
+  return projects.map((project, index) => {
+    const nextIndex = (index + 1) % projects.length;
+    return {
+      params: { slug: project.slug },
+      props: { project, nextProject: projects[nextIndex] },
+    };
+  });
+}
+
+interface Props {
+  project: ProjectData;
+  nextProject: ProjectData;
+}
+
+const { project, nextProject } = Astro.props;
+
+// Construct specific SEO metadata for this project
+const title = `${project.title} | Portafolio SENGKO`;
+const description = project.description;
+const image = project.image;
+
+// Create specific structured data for this project
+const creativeWorkSchema = {
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": project.title,
+  "description": project.description,
+  "image": project.image,
+  "keywords": project.category,
+  "creator": {
+    "@type": "Organization",
+    "name": "SENGKO"
+  }
+};
+---
+
+<BaseLayout title={title} description={description} image={image}>
+  <!-- Inject specific JSON-LD for the project in addition to global BaseLayout schemas -->
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(creativeWorkSchema)} />
+
+  <main class="relative bg-[var(--color-bg)] text-white overflow-x-hidden">
+
+    <!-- ─────────────────────────────────────────── -->
+    <!--  1. CINEMATIC HERO                          -->
+    <!-- ─────────────────────────────────────────── -->
+    <section class="relative min-h-[95vh] flex flex-col justify-end pb-32 pt-48 bg-black overflow-hidden">
+      <!-- Background Layer -->
+      <div class="absolute inset-0 z-0">
+        <img
+          src={project.image}
+          alt={project.title}
+          class="w-full h-full object-cover brightness-[0.4] contrast-[1.1] grayscale-[30%] scale-105 transform origin-center"
+          id="project-hero-bg"
+        />
+        <div class="absolute inset-0 z-10 bg-gradient-to-r from-black/95 via-black/60 to-transparent"></div>
+        <div class="absolute inset-0 z-10 bg-gradient-to-t from-black via-transparent to-black/40"></div>
+      </div>
+
+      <!-- Content Layer -->
+      <div class="container-custom relative z-30">
+        <div class="max-w-5xl">
+          <span class="text-[var(--color-primary)] text-[10px] tracking-[0.25em] font-medium uppercase mb-8 block reveal">
+            Caso de Estudio — {project.category}
+          </span>
+          <h1 class="text-[clamp(54px,9vw,130px)] font-medium tracking-tight leading-[0.88] uppercase mb-12 reveal delay-1" style="font-family: var(--font-heading);">
+            {project.title}
+          </h1>
+          
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-white/20 pt-10 reveal delay-2">
+            <div>
+              <span class="text-white/30 text-[9px] uppercase tracking-[0.2em] mb-2 block">Ubicación</span>
+              <span class="text-white/90 text-sm font-medium tracking-tight">{project.location}</span>
+            </div>
+            <div>
+              <span class="text-white/30 text-[9px] uppercase tracking-[0.2em] mb-2 block">Especificaciones</span>
+              <span class="text-white/90 text-sm font-medium tracking-tight">{project.specs}</span>
+            </div>
+            <div class="md:col-span-2 flex justify-start md:justify-end">
+              <button data-modal-trigger="consultation" class="px-8 py-3 border border-white/20 text-white text-[9px] font-medium tracking-[0.16em] uppercase hover:bg-white hover:text-black transition-colors duration-400">
+                Consulta Técnica
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────────────────────── -->
+    <!--  2. PROJECT STORY SECTION                   -->
+    <!-- ─────────────────────────────────────────── -->
+    <section class="bg-[#050505] py-32 md:py-48 relative">
+      <div class="container-custom">
+        <div class="grid lg:grid-cols-12 gap-16 lg:gap-24 items-start">
+          <div class="lg:col-span-5 reveal">
+            <span class="section-label">Contexto del Proyecto</span>
+            <h2 class="text-3xl md:text-5xl font-medium tracking-tight leading-[1.05] mb-10">
+              Desafío Estructural
+            </h2>
+            <div class="accent-rule opacity-80"></div>
+          </div>
+          <div class="lg:col-span-7 lg:pt-20 space-y-8 reveal delay-2">
+            <p class="text-xl md:text-2xl font-light leading-[1.6] tracking-[-0.01em]">
+              {project.description}
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────────────────────── -->
+    <!--  3. TECHNICAL INFORMATION BLOCK             -->
+    <!-- ─────────────────────────────────────────── -->
+    <section class="bg-[#0A0A0A] py-32 md:py-48 border-y border-white/5">
+      <div class="container-custom">
+        <div class="grid md:grid-cols-2 gap-16 lg:gap-32">
+          
+          <!-- Solutions -->
+          <div class="reveal">
+            <h3 class="text-[var(--color-primary)] text-[10px] uppercase tracking-[0.2em] font-medium mb-10 border-b border-white/10 pb-4 block">
+              Soluciones Implementadas
+            </h3>
+            <ul class="space-y-6">
+              {project.solutions.map((solution) => (
+                <li class="flex items-start gap-4">
+                  <span class="text-white/40 mt-1">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 6L9 17l-5-5"></path></svg>
+                  </span>
+                  <span class="text-white/80 text-lg font-light leading-relaxed">{solution}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Processes -->
+          <div class="reveal delay-2">
+            <h3 class="text-[var(--color-primary)] text-[10px] uppercase tracking-[0.2em] font-medium mb-10 border-b border-white/10 pb-4 block">
+              Ingeniería Aplicada
+            </h3>
+            <ul class="space-y-6">
+              {project.processes.map((process) => (
+                <li class="flex items-start gap-4">
+                  <span class="text-white/40 mt-1">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                  </span>
+                  <span class="text-white/80 text-lg font-light leading-relaxed">{process}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────────────────────── -->
+    <!--  4. IMMERSIVE IMAGE GALLERY                 -->
+    <!-- ─────────────────────────────────────────── -->
+    <section class="bg-black py-32 md:py-48">
+      <div class="container-custom">
+        <div class="mb-20 reveal">
+          <span class="section-label">Registro Visual</span>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-10 auto-rows-[400px] md:auto-rows-[500px]">
+          {project.gallery.map((img, i) => {
+            // Masonry layout logic: alternate wide and square spans
+            const isWide = i % 3 === 0;
+            const spanClass = isWide ? "md:col-span-8" : "md:col-span-4";
+            
+            return (
+              <div class={`relative overflow-hidden group ${spanClass} reveal delay-${(i % 3) + 1}`}>
+                <img 
+                  src={img} 
+                  alt={`Vista de ${project.title}`} 
+                  loading="lazy"
+                  class="absolute inset-0 w-full h-full object-cover brightness-75 contrast-110 grayscale-[20%] transition-transform duration-[1.5s] ease-out group-hover:scale-105 group-hover:brightness-100 group-hover:grayscale-0"
+                />
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────────────────────── -->
+    <!--  5. NEXT PROJECT NAVIGATION                 -->
+    <!-- ─────────────────────────────────────────── -->
+    <section class="relative py-40 md:py-56 bg-black overflow-hidden flex items-center justify-center border-t border-white/5">
+      <div class="absolute inset-0 z-0">
+        <img 
+          src={nextProject.image} 
+          alt={nextProject.title} 
+          loading="lazy"
+          class="w-full h-full object-cover brightness-[0.2] grayscale contrast-125 scale-105" 
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent"></div>
+      </div>
+      
+      <div class="container-custom relative z-10 text-center max-w-4xl">
+        <span class="text-[var(--color-primary)] text-[10px] tracking-[0.25em] font-medium uppercase mb-8 block reveal">Siguiente Proyecto</span>
+        <h2 class="text-4xl md:text-7xl font-medium tracking-tight leading-[1.05] mb-12 reveal delay-1" style="font-family: var(--font-heading);">
+          {nextProject.title}
+        </h2>
+        <div class="reveal delay-2">
+          <a href={`/proyectos/${nextProject.slug}`} class="inline-block px-12 py-5 border border-white/20 text-white text-[10px] font-semibold tracking-[0.16em] uppercase hover:bg-white hover:text-black transition-all duration-400">
+            Explorar Proyecto
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</BaseLayout>
+
+<script>
+  import gsap from 'gsap';
+  import ScrollTrigger from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Hero Parallax
+  const heroBg = document.getElementById('project-hero-bg');
+  if (heroBg) {
+    gsap.to(heroBg, {
+      yPercent: 15,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: heroBg.parentElement,
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true
+      }
+    });
+  }
+
+  // Reveal animations
+  const DELAY_MAP: Record<string, number> = {
+    'delay-1': 0.15,
+    'delay-2': 0.3,
+    'delay-3': 0.45,
+    'delay-4': 0.6,
+  };
+
+  document.querySelectorAll<HTMLElement>('.reveal').forEach((el) => {
+    let delay = 0;
+    for (const [cls, val] of Object.entries(DELAY_MAP)) {
+      if (el.classList.contains(cls)) { delay = val; break; }
+    }
+
+    gsap.fromTo(el,
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1.2,
+        delay,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 85%',
+          once: true
+        }
+      }
+    );
+  });
+</script>
