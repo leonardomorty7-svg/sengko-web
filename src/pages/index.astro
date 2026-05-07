@@ -227,7 +227,7 @@ const serviceImages = [
       <!-- END CINEMATIC PORTFOLIO INTRO -->
 
 
-      <div id="projects-story-container" class="relative bg-black w-full" style={`height: ${projects.length * 100}vh; margin-top: -22vh; position: relative; z-index: 2;`}>
+      <div id="projects-story-container" class="projects-story-container relative bg-black w-full" style={`--projects-count: ${projects.length};`}>
         <div class="projects-story-inner sticky top-0 h-screen w-full overflow-hidden hidden lg:grid lg:grid-cols-[30%_70%]">
           
           <!-- LEFT SIDE: TEXT (30%) -->
@@ -560,7 +560,7 @@ const serviceImages = [
       scrollTrigger: {
         trigger: storyContainer,
         start: "top top",
-        end: () => "+=" + (images.length * 100 + 100) + "%",
+        end: "bottom top",
         scrub: true,
         pin: true,
         anticipatePin: 1,
@@ -675,6 +675,19 @@ const serviceImages = [
     font-family: var(--font-heading);
     max-width: 1200px;
     will-change: transform, opacity;
+  }
+
+  .projects-story-container {
+    height: auto;
+    margin-top: -22vh;
+    position: relative;
+    z-index: 2;
+  }
+
+  @media (min-width: 1024px) {
+    .projects-story-container {
+      height: calc(var(--projects-count) * 100vh);
+    }
   }
 
 
