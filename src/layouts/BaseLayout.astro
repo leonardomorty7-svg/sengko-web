@@ -3,8 +3,8 @@ import '../styles/global.css';
 import { siteConfig } from '../data/site-config';
 
 import Header from '../components/astro/Header.astro';
-import ChatbotIntegration from '../components/astro/ChatbotIntegration.astro';
 import WhatsAppButton from '../components/astro/WhatsAppButton.astro';
+import SupportButton from '../components/astro/SupportButton.astro';
 import ConsultationModal from '../components/astro/ConsultationModal.astro';
 
 interface Props {
@@ -98,9 +98,9 @@ const schemaData = {
   <body>
     <Header />
     <slot />
+    <SupportButton />
     <WhatsAppButton />
     <ConsultationModal />
-    <ChatbotIntegration />
   </body>
 </html>
 

@@ -1,0 +1,61 @@
+---
+// src/components/astro/SupportButton.astro
+---
+
+<button 
+  data-modal-trigger="consultation"
+  class="support-float flex items-center justify-center transition-all duration-500 hover:scale-110 active:scale-95 group"
+  aria-label="Solicitar Consulta Técnica"
+>
+  <svg 
+    width="20" 
+    height="20" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    stroke-width="2" 
+    stroke-linecap="round" 
+    stroke-linejoin="round"
+  >
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+    <line x1="8" y1="9" x2="16" y2="9"></line>
+    <line x1="8" y1="13" x2="14" y2="13"></line>
+  </svg>
+  
+  <!-- Tooltip / Label -->
+  <span class="absolute right-full mr-4 bg-black/90 border border-white/10 px-3 py-1.5 text-[9px] uppercase tracking-[0.15em] text-[var(--color-primary)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap">
+    Consulta Técnica
+  </span>
+</button>
+
+<style>
+  .support-float {
+    position: fixed;
+    bottom: 12rem; /* Positioned above WhatsApp (7rem) */
+    right: 2rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    background-color: var(--color-bg-soft);
+    color: var(--color-primary);
+    border: 1px solid rgba(183, 245, 0, 0.3);
+    z-index: 80;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    border-radius: 0px;
+    cursor: pointer;
+  }
+
+  .support-float:hover {
+    background-color: var(--color-primary);
+    color: black;
+    border-color: var(--color-primary);
+  }
+
+  @media (max-width: 768px) {
+    .support-float {
+      bottom: 9.5rem; /* Adjusted for mobile */
+      right: 1rem;
+      width: 3.2rem;
+      height: 3.2rem;
+    }
+  }
+</style>
