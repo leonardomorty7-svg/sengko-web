@@ -195,7 +195,7 @@ const serviceImages = [
         <!-- Static industrial background -->
         <div class="absolute inset-0 z-0">
           <img
-            src="/projects/postobon-01.jpg"
+            src="/images/projects/postobon-01.jpg"
             alt=""
             aria-hidden="true"
             class="w-full h-full object-cover"
@@ -251,7 +251,7 @@ const serviceImages = [
                       <span class="text-white/90 text-sm font-medium tracking-tight">{p.location}</span>
                     </div>
                   </div>
-                  <div class="mt-10 pointer-events-auto">
+                  <div class="mt-10">
                     <a href={`/proyectos/${p.slug}`} class="inline-block border border-white/20 text-white text-[9px] font-semibold tracking-[0.16em] uppercase px-8 py-4 hover:bg-white hover:text-black transition-all duration-400">
                       Ver Proyecto
                     </a>
@@ -741,6 +741,7 @@ const serviceImages = [
       }, {
         opacity: 1,
         y: 0,
+        pointerEvents: "auto",
         duration: 0.6,
         ease: "power2.out"
       }, "<");
@@ -753,6 +754,7 @@ const serviceImages = [
         tl.to(text, {
           opacity: 0,
           y: -20,
+          pointerEvents: "none",
           duration: 0.5,
           ease: "power2.in"
         });
