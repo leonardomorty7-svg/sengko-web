@@ -106,9 +106,28 @@ const id = import.meta.env.PUBLIC_CHATBOT_ID || '';
   }
   
   #chatbase-bubble-button {
-    background-color: var(--color-primary) !important;
+    background-color: #0A0A0A !important;
+    border: 1px solid rgba(183, 245, 0, 0.4) !important;
     border-radius: 0px !important;
-    box-shadow: 0 10px 20px rgba(183, 245, 0, 0.15) !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+    transition: all 0.4s ease !important;
+  }
+
+  #chatbase-bubble-button:hover {
+    background-color: var(--color-primary) !important;
+    border-color: var(--color-primary) !important;
+  }
+
+  /* ── Chatbase Warning Removal ── */
+  /* Targeted removal of the 'Invalid website' warning badge on localhost */
+  #chatbase-bubble-button span[style*="background-color: red"],
+  #chatbase-bubble-button span[style*="background-color: rgb(255, 0, 0)"],
+  #chatbase-bubble-button > div[style*="background-color: red"],
+  .chatbase-invalid-domain-badge {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
   }
 
   /* Crisp specific styling */
@@ -128,8 +147,16 @@ const id = import.meta.env.PUBLIC_CHATBOT_ID || '';
 
   /* Cinematic shadow for the launcher */
   .crisp-client .cc-1x {
-    box-shadow: 0 10px 30px rgba(183, 245, 0, 0.15) !important;
-    border: 1px solid rgba(183, 245, 0, 0.3) !important;
+    background-color: #0A0A0A !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+    border: 1px solid rgba(183, 245, 0, 0.4) !important;
+    border-radius: 0px !important;
+    transition: all 0.4s ease !important;
+  }
+
+  .crisp-client .cc-1x:hover {
+    border-color: var(--color-primary) !important;
+    background-color: #111111 !important;
   }
 
   /* Mobile Overrides */
