@@ -4,6 +4,7 @@ import { siteConfig } from '../data/site-config';
 
 import Header from '../components/astro/Header.astro';
 import ChatbotIntegration from '../components/astro/ChatbotIntegration.astro';
+import ConsultationModal from '../components/astro/ConsultationModal.astro';
 
 interface Props {
   title?: string;
@@ -54,6 +55,7 @@ const {
   <body>
     <Header />
     <slot />
+    <ConsultationModal />
     <ChatbotIntegration />
   </body>
 </html>
