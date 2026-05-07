@@ -15,6 +15,13 @@ const id = import.meta.env.PUBLIC_CHATBOT_ID || '';
         if (provider === 'crisp') {
           window.$crisp = [];
           window.CRISP_WEBSITE_ID = id;
+          
+          // SENGKO Premium Configuration
+          window.$crisp.push(["set", "session:data", [[["theme", "dark"]]]]);
+          window.$crisp.push(["config", "color:theme", ["green"]]);
+          window.$crisp.push(["config", "hide:on:mobile", [false]]);
+          window.$crisp.push(["safe", true]); // Prevents intrusive popups
+
           (function() {
             var d = document;
             var s = d.createElement("script");
@@ -108,10 +115,21 @@ const id = import.meta.env.PUBLIC_CHATBOT_ID || '';
   .crisp-client * {
     --cc-color-focus: var(--color-primary) !important;
     --cc-color-hover: var(--color-primary) !important;
+    --cc-bg-chat-header: #0A0A0A !important;
   }
 
-  .crisp-client .cc-1x {
+  /* Force sharp industrial corners on Crisp */
+  .crisp-client .cc-1x,
+  .crisp-client .cc-kv6t,
+  .crisp-client .cc-1b,
+  .crisp-client .cc-unoo {
     border-radius: 0px !important;
+  }
+
+  /* Cinematic shadow for the launcher */
+  .crisp-client .cc-1x {
+    box-shadow: 0 10px 30px rgba(183, 245, 0, 0.15) !important;
+    border: 1px solid rgba(183, 245, 0, 0.3) !important;
   }
 
   /* Mobile Overrides */
