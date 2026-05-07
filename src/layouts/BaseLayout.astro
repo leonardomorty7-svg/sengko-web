@@ -10,13 +10,50 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  canonicalURL?: URL | string;
 }
 
 const { 
   title = siteConfig.title, 
   description = siteConfig.description, 
-  image = siteConfig.ogImage 
+  image = siteConfig.ogImage,
+  canonicalURL = new URL(Astro.url.pathname, Astro.site || siteConfig.url)
 } = Astro.props;
+
+const schemaData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${siteConfig.url}/#organization`,
+      "name": "SENGKO",
+      "url": siteConfig.url,
+      "logo": `${siteConfig.url}/images/branding/logo-sengko-primary.svg`,
+      "description": siteConfig.description,
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": siteConfig.contact.email,
+        "telephone": siteConfig.contact.phone,
+        "contactType": "customer service"
+      },
+      "sameAs": [
+        siteConfig.social.linkedin,
+        siteConfig.social.twitter
+      ]
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": `${siteConfig.url}/#localbusiness`,
+      "name": "SENGKO Ingeniería",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": siteConfig.contact.address
+      },
+      "telephone": siteConfig.contact.phone,
+      "url": siteConfig.url
+    }
+  ]
+};
 ---
 
 <!DOCTYPE html>
@@ -26,6 +63,8 @@ const {
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/x-icon" href="/images/branding/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="canonical" href={canonicalURL} />
     
     <!-- SEO -->
     <title>{title}</title>
@@ -51,6 +90,9 @@ const {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
   </head>
   <body>
     <Header />

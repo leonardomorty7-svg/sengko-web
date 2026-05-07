@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { getProjects, getServices } from '../lib/api';
 import ServiceCard from '../components/astro/ServiceCard.astro';
 import ProjectCard from '../components/astro/ProjectCard.astro';
+import { siteConfig } from '../data/site-config';
 import ScrollNarrative from '../components/astro/ScrollNarrative.astro';
 
 const projects = [
@@ -432,20 +433,49 @@ const serviceImages = [
       </div>
     </section>
 
-    <!-- Integrated Footer -->
-    <footer class="relative z-10 border-t border-white/10 py-12 mt-auto bg-transparent">
+    <!-- Integrated Corporate Footer -->
+    <footer class="relative z-10 border-t border-white/10 py-16 mt-auto bg-[#050505]">
     <div class="container-custom">
-      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
-        <div>
-          <img src="/images/branding/logo-sengko-primary.svg" alt="SENGKO" class="h-5 mb-4 opacity-60" />
-          <small class="text-white/25 font-normal tracking-wider">© {new Date().getFullYear()} Grupo SENGKO · Ingeniería Estructural</small>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 lg:gap-24 mb-16">
+        
+        <!-- Branding & Descriptor -->
+        <div class="md:col-span-2">
+          <img src="/images/branding/logo-sengko-primary.svg" alt="SENGKO" class="h-6 mb-6 opacity-80" />
+          <p class="text-white/40 text-sm leading-[1.8] font-light max-w-[35ch]">
+            Ingeniería de alto desempeño enfocada en el diseño, fabricación y montaje de infraestructura metálica con precisión técnica.
+          </p>
         </div>
-        <nav class="flex gap-10">
-          <a href="#servicios" class="text-white/30 hover:text-white/70 transition-colors"><small>Servicios</small></a>
-          <a href="#proyectos" class="text-white/30 hover:text-white/70 transition-colors"><small>Proyectos</small></a>
-          <a href="#contacto" class="text-white/30 hover:text-white/70 transition-colors"><small>Contacto</small></a>
-          <a href="#" class="text-white/30 hover:text-white/70 transition-colors"><small>Privacidad</small></a>
-        </nav>
+
+        <!-- Corporate Info -->
+        <div>
+          <span class="text-[var(--color-primary)] text-[9px] uppercase tracking-[0.2em] font-medium mb-6 block">Oficina Principal</span>
+          <address class="not-italic text-white/50 text-sm font-light leading-[1.8] space-y-2">
+            <p>{siteConfig.contact.address}</p>
+            <p class="pt-2"><a href={`mailto:${siteConfig.contact.email}`} class="hover:text-white transition-colors">{siteConfig.contact.email}</a></p>
+            <p><a href={`tel:${siteConfig.contact.phone.replace(/[^0-9+]/g, '')}`} class="hover:text-white transition-colors">{siteConfig.contact.phone}</a></p>
+          </address>
+        </div>
+
+        <!-- Navigation -->
+        <div>
+          <span class="text-[var(--color-primary)] text-[9px] uppercase tracking-[0.2em] font-medium mb-6 block">Navegación</span>
+          <nav class="flex flex-col gap-3">
+            <a href="/#proyectos" class="text-white/50 hover:text-white transition-colors text-sm font-light">Proyectos</a>
+            <a href="/#servicios" class="text-white/50 hover:text-white transition-colors text-sm font-light">Servicios</a>
+            <a href="/nosotros" class="text-white/50 hover:text-white transition-colors text-sm font-light">Nosotros</a>
+            <a href="/#contacto" class="text-white/50 hover:text-white transition-colors text-sm font-light">Contacto</a>
+          </nav>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
+        <small class="text-white/30 font-normal tracking-wider text-[10px]">© {new Date().getFullYear()} {siteConfig.title}</small>
+        <div class="flex gap-6">
+          <a href={siteConfig.social.linkedin} target="_blank" rel="noopener noreferrer" class="text-white/30 hover:text-white transition-colors text-[10px] tracking-wider uppercase">LinkedIn</a>
+          <a href={siteConfig.social.twitter} target="_blank" rel="noopener noreferrer" class="text-white/30 hover:text-white transition-colors text-[10px] tracking-wider uppercase">Twitter</a>
+        </div>
       </div>
     </div>
   </footer>
