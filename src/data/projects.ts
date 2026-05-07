@@ -155,5 +155,53 @@ export const projects: ProjectData[] = [
       "/projects/parqueaderos/gallery-02.jpg",
       "/projects/parqueaderos/gallery-03.jpg"
     ]
+  },
+  {
+    title: "Teatro Gestos Mnemes",
+    slug: "teatro-gestos-mnemes",
+    category: "PROYECTO EDIFICIOS",
+    specs: "46 ton",
+    location: "Bello, Antioquia",
+    image: "/projects/teatro-gestos-mnemes/hero.jpg",
+    description: "Construcción de estructura metálica para teatro cultural con sistema estructural de múltiples niveles, diseñado para espacios artísticos y circulación interior de alta resistencia.",
+    solutions: [
+      "Estructura metálica multinivel",
+      "Vigas estructurales de gran luz",
+      "Integración arquitectónica cultural"
+    ],
+    processes: [
+      "Diseño estructural",
+      "Fabricación especializada",
+      "Montaje urbano de precisión"
+    ],
+    gallery: [
+      "/projects/teatro-gestos-mnemes/gallery-01.jpg",
+      "/projects/teatro-gestos-mnemes/gallery-02.jpg",
+      "/projects/teatro-gestos-mnemes/gallery-03.jpg"
+    ]
+  },
+  {
+    title: "Bodega Textil",
+    slug: "bodega-textil",
+    category: "PROYECTO NAVES INDUSTRIALES",
+    specs: "23 ton",
+    location: "Bello, Antioquia",
+    image: "/projects/bodega-textil/hero.jpg",
+    description: "Construcción de estructura metálica industrial para bodega textil con espacios de operación amplios, alta resistencia estructural y optimización funcional interior.",
+    solutions: [
+      "Cerchas metálicas industriales",
+      "Espacios de operación abiertos",
+      "Optimización estructural interior"
+    ],
+    processes: [
+      "Ingeniería estructural industrial",
+      "Fabricación metálica",
+      "Montaje técnico especializado"
+    ],
+    gallery: [
+      "/projects/bodega-textil/gallery-01.jpg",
+      "/projects/bodega-textil/gallery-02.jpg",
+      "/projects/bodega-textil/gallery-03.jpg"
+    ]
   }
 ];
