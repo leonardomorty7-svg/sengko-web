@@ -335,9 +335,62 @@ const serviceImages = [
               description={service.description}
               index={i}
               image={serviceImages[i]}
+              href={i === 0 ? "#diseno-estructural" : undefined}
             />
           </div>
         ))}
+      </div>
+    </section>
+
+    <!-- ─────────────────────────────────────────── -->
+    <!--  6b. DETAILED SERVICE NARRATIVE — Structural -->
+    <!-- ─────────────────────────────────────────── -->
+    <section id="diseno-estructural" class="relative z-40 bg-[var(--color-bg)] text-white py-32 md:py-56 overflow-hidden">
+      <!-- Background subtle texture -->
+      <div class="absolute inset-0 pointer-events-none opacity-[0.03] bg-noise"></div>
+      
+      <div class="container-custom relative z-10">
+        <div class="grid lg:grid-cols-12 gap-16 md:gap-24">
+          
+          <!-- Sticky Header Info -->
+          <div class="lg:col-span-5 reveal">
+            <span class="section-label">Detalle Técnico</span>
+            <h2 class="text-4xl md:text-6xl font-medium tracking-tight leading-[0.95] mb-12 uppercase">
+              Proceso de <br/>
+              <span class="text-[var(--color-primary)]">diseño estructural</span>
+            </h2>
+            <div class="accent-rule"></div>
+            <p class="text-white/50 text-lg font-light leading-relaxed max-w-[35ch] mb-12">
+              Transformamos requerimientos arquitectónicos en soluciones de ingeniería viables, priorizando la seguridad y la optimización de recursos.
+            </p>
+            
+            <a href="#" data-modal-trigger="consultation" class="inline-block px-10 py-5 border border-[var(--color-primary)] text-[var(--color-primary)] text-[9px] font-semibold tracking-[0.16em] uppercase hover:bg-[var(--color-primary)] hover:text-black transition-all duration-400">
+              Solicitar información técnica
+            </a>
+          </div>
+
+          <!-- Technical Grid -->
+          <div class="lg:col-span-6 lg:col-start-7">
+            <div class="grid sm:grid-cols-2 gap-x-12 gap-y-16">
+              {[
+                { title: 'Ingeniería Base', desc: 'Cálculo de cargas y dimensionamiento inicial bajo normativas NSR-10.' },
+                { title: 'Estructuras Metálicas', desc: 'Diseño avanzado de pórticos y cerchas de alta complejidad.' },
+                { title: 'Naves Industriales', desc: 'Optimización de claros y alturas para máxima operatividad.' },
+                { title: 'Cubiertas y Mezanines', desc: 'Soluciones modulares de rápida ejecución y alta resistencia.' },
+                { title: 'Puentes Peatonales', desc: 'Diseño estructural con énfasis en dinámica y estética urbana.' },
+                { title: 'Precisión Técnica', desc: 'Detallado milimétrico para garantizar un montaje sin ajustes en obra.' },
+              ].map((item) => (
+                <div class="reveal">
+                  <h4 class="text-white text-xs font-semibold tracking-wider uppercase mb-4">{item.title}</h4>
+                  <p class="text-white/40 text-sm font-light leading-relaxed">
+                    {item.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
 

@@ -4,9 +4,10 @@ interface Props {
   description: string;
   index: number;
   image?: string;
+  href?: string;
 }
 
-const { title, description, index, image } = Astro.props;
+const { title, description, index, image, href } = Astro.props;
 const isEven = index % 2 === 0;
 ---
 
@@ -53,10 +54,17 @@ const isEven = index % 2 === 0;
       {description}
     </p>
     
-    <div class="flex items-center gap-4 text-black group-hover:text-black/50 transition-colors duration-500 cursor-pointer w-fit">
-      <span class="text-[9px] font-semibold tracking-[0.2em] uppercase">Explorar proceso</span>
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="transform transition-transform duration-500 group-hover:translate-x-2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-    </div>
+    {href ? (
+      <a href={href} class="flex items-center gap-4 text-black group-hover:text-black/50 transition-colors duration-500 cursor-pointer w-fit no-underline">
+        <span class="text-[9px] font-semibold tracking-[0.2em] uppercase">Explorar proceso</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="transform transition-transform duration-500 group-hover:translate-x-2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+    ) : (
+      <div class="flex items-center gap-4 text-black group-hover:text-black/50 transition-colors duration-500 cursor-pointer w-fit">
+        <span class="text-[9px] font-semibold tracking-[0.2em] uppercase">Explorar proceso</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="transform transition-transform duration-500 group-hover:translate-x-2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </div>
+    )}
   </div>
 </div>
 
