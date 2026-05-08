@@ -4,7 +4,7 @@
 <header id="main-header" class="fixed top-0 left-0 w-full z-[100] transition-all duration-500 py-6">
   <div class="px-6 lg:px-10 flex justify-between items-center max-w-[1920px] mx-auto relative z-[110]">
     <!-- Logo Branding -->
-    <a href="/" class="block shrink-0">
+    <a href="/" class="block shrink-0 transition-opacity duration-500" id="header-logo">
       <img 
         id="nav-logo"
         src="/images/branding/logo-sengko-primary.svg" 
@@ -14,7 +14,7 @@
     </a>
 
     <!-- Right Controls -->
-    <div class="flex items-center gap-8 md:gap-12">
+    <div class="flex items-center gap-8 md:gap-12" id="header-actions">
       <a href="#" data-modal-trigger="consultation" class="hidden sm:block label px-8 py-3.5 border border-white/30 bg-black/20 backdrop-blur-md text-white text-[9px] font-semibold tracking-[0.14em] uppercase drop-shadow-lg hover:bg-white hover:text-black hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] transition-all duration-500">
         Iniciar Proyecto
       </a>
@@ -106,6 +106,9 @@
       overlay.style.pointerEvents = 'auto';
       document.body.style.overflow = 'hidden';
       
+      // Hide header elements
+      gsap.to('#header-logo, #header-actions > *:not(#menu-toggle)', { opacity: 0, pointerEvents: 'none', duration: 0.4 });
+      
       // Animate hamburger to X
       gsap.to('.line-1', { rotation: 45, y: 7, width: 32, duration: 0.4 });
       gsap.to('.line-2', { opacity: 0, duration: 0.2 });
@@ -114,6 +117,9 @@
       menuTl.reverse();
       overlay.style.pointerEvents = 'none';
       document.body.style.overflow = '';
+      
+      // Show header elements
+      gsap.to('#header-logo, #header-actions > *:not(#menu-toggle)', { opacity: 1, pointerEvents: 'auto', duration: 0.4 });
       
       // Reset hamburger
       gsap.to('.line-1', { rotation: 0, y: 0, width: 32, duration: 0.4 });
@@ -216,5 +222,13 @@
   @media (max-width: 1023px) {
     .menu-link-text { font-size: clamp(40px, 12vw, 80px); }
     .menu-link { gap: 1rem; }
+  }
+
+  /* Landscape specifically: tighter space */
+  @media (max-height: 500px) and (orientation: landscape) {
+    #menu-overlay { padding-top: 2rem; }
+    .menu-link-text { font-size: clamp(32px, 8vh, 48px); }
+    .menu-link { gap: 0.5rem; }
+    .menu-link-index { font-size: 10px; }
   }
 </style>

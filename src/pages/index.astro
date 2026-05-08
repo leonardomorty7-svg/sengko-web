@@ -98,7 +98,7 @@ const serviceImages = [
             <h2 class="text-[clamp(48px,9vw,110px)] font-medium tracking-[-0.04em] leading-[0.95] uppercase mb-8">
               Estructura.<br/>
               Precisión.<br/>
-              <span class="text-black/30">Ejecución.</span>
+              <span class="text-black/40 md:text-black/30">Ejecución.</span>
             </h2>
           </div>
           <div class="lg:col-span-5 lg:col-start-8 lg:pt-32 flex flex-col gap-12 reveal delay-2">
@@ -210,17 +210,17 @@ const serviceImages = [
           <span class="section-label mb-10 block" style="color: var(--color-primary);">Portafolio</span>
           <h2 style="
             font-family: var(--font-heading);
-            font-size: clamp(44px, 9.5vw, 136px);
+            font-size: clamp(38px, 9.5vw, 136px);
             font-weight: 500;
-            line-height: 0.88;
+            line-height: 0.95;
             letter-spacing: -0.04em;
             text-transform: uppercase;
             color: #fff;
             margin: 0;
           ">
-            <span style="display: block; white-space: nowrap;">Infraestructura</span>
-            <span style="display: block; white-space: nowrap; color: var(--color-primary);">de alto impacto</span>
-            <span style="display: block; white-space: nowrap;">ejecutada.</span>
+            <span class="block md:whitespace-nowrap">Infraestructura</span>
+            <span class="block md:whitespace-nowrap text-[var(--color-primary)]">de alto impacto</span>
+            <span class="block md:whitespace-nowrap">ejecutada.</span>
           </h2>
         </div>
       </div>
@@ -862,8 +862,30 @@ const serviceImages = [
       position: relative !important;
       display: block !important;
     }
-    .hero-state:not(#state-1) { margin-top: 1rem; }
+    .hero-state:not(#state-1) { margin-top: 0.5rem; }
     .resolution-title { text-align: left; }
+
+    /* Small screens (iPhone SE etc) */
+    @media (max-height: 700px) {
+      .hero-eyebrow { margin-bottom: 1rem; }
+      #hero-meta { @apply mt-6; }
+      .hero-subtext { margin-bottom: 1.5rem; font-size: 14px; }
+      .hero-actions a { @apply px-8 py-4 text-[8px]; }
+      #hero-scroll-indicator { bottom: 6px; transform: scale(0.8) translateX(-50%); opacity: 0.5; }
+    }
+
+    /* Landscape Mode Fixes */
+    @media (orientation: landscape) and (max-height: 500px) {
+      .hero-sticky { height: auto; min-height: 100vh; display: flex; align-items: center; padding: 60px 0; }
+      .hero-eyebrow { display: none; }
+      .hero-title { font-size: 32px; line-height: 1.1; margin-bottom: 0.25rem; }
+      .hero-state:not(#state-1) { margin-top: 0.25rem; }
+      #hero-meta { margin-top: 1.5rem; }
+      .hero-subtext { margin-bottom: 1rem; font-size: 13px; max-width: 50ch; }
+      .hero-actions { @apply gap-2; }
+      .hero-actions a { @apply px-6 py-3; }
+      #hero-scroll-indicator { display: none; }
+    }
   }
 
   .animate-scroll-drop {

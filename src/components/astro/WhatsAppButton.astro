@@ -67,9 +67,18 @@ const whatsappUrl = `https://wa.me/${whatsappConfig.phone}?text=${encodedMessage
   @media (max-width: 768px) {
     .whatsapp-float {
       bottom: 5.5rem;
-      right: 1rem;
+      right: 1.25rem;
       width: 3.2rem;
       height: 3.2rem;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .whatsapp-float {
+      bottom: 5.25rem;
+      right: 0.75rem;
+      width: 2.8rem;
+      height: 2.8rem;
     }
   }
 </style>
