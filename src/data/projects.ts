@@ -9,12 +9,32 @@ export interface ProjectData {
   solutions: string[];
   processes: string[];
   gallery: string[];
+  participation?: string;
 }
 
 export const projects: ProjectData[] = [
   {
+    title: "Villa Hermosa",
+    slug: "villa-hermosa",
+    category: "ESTRUCTURA METÁLICA",
+    specs: "23 ton · 540 m²",
+    location: "Bello, Antioquia",
+    image: "/projects/villa-hermosa/hero.jpg",
+    description: "Infraestructura metálica para el sector industrial en Villa Hermosa, priorizando la iluminación natural y espacios libres de columnas para procesos de producción.",
+    solutions: ["Pórticos de sección variable", "Lucernarios integrados", "Sistemas de ventilación natural"],
+    processes: ["Soldadura semiautomática", "Granallado y pintura industrial", "Inspección de soldaduras UT"],
+    gallery: [
+      "/projects/villa-hermosa/gallery-01.jpg",
+      "/projects/villa-hermosa/gallery-02.jpg",
+      "/projects/villa-hermosa/gallery-03.jpg",
+      "/projects/villa-hermosa/gallery-04.jpg",
+      "/projects/villa-hermosa/gallery-05.jpg"
+    ]
+  },
+  {
     title: "Postobón Malambo",
     slug: "postobon-malambo",
+    participation: "Participación de SENGKO: fabricación y montaje de estructura metálica.",
     category: "ESTRUCTURA METÁLICA BODEGAS",
     specs: "170 ton · 6360 m²",
     location: "Malambo, Atlántico",
@@ -79,6 +99,7 @@ export const projects: ProjectData[] = [
   {
     title: "Puente Peatonal Hatovial",
     slug: "puente-hatovial",
+    participation: "Participación de SENGKO: fabricación y montaje de estructura metálica.",
     category: "INFRAESTRUCTURA",
     specs: "78 m · 65 ton",
     location: "Bello, Antioquia",
@@ -90,22 +111,6 @@ export const projects: ProjectData[] = [
       "/projects/puente-hatovial/gallery-01.jpg",
       "/projects/puente-hatovial/gallery-02.jpg",
       "/projects/puente-hatovial/gallery-03.jpg"
-    ]
-  },
-  {
-    title: "Villa Hermosa",
-    slug: "villa-hermosa",
-    category: "ESTRUCTURA METÁLICA",
-    specs: "23 ton · 540 m²",
-    location: "Bello, Antioquia",
-    image: "/projects/villa-hermosa/hero.jpg",
-    description: "Infraestructura metálica para el sector industrial en Villa Hermosa, priorizando la iluminación natural y espacios libres de columnas para procesos de producción.",
-    solutions: ["Pórticos de sección variable", "Lucernarios integrados", "Sistemas de ventilación natural"],
-    processes: ["Soldadura semiautomática", "Granallado y pintura industrial", "Inspección de soldaduras UT"],
-    gallery: [
-      "/projects/villa-hermosa/gallery-01.jpg",
-      "/projects/villa-hermosa/gallery-02.jpg",
-      "/projects/villa-hermosa/gallery-03.jpg"
     ]
   },
   {
@@ -128,7 +133,7 @@ export const projects: ProjectData[] = [
     title: "Kerry",
     slug: "kerry",
     category: "INFRAESTRUCTURA INDUSTRIAL",
-    specs: "42 ton · 800 m²",
+    specs: "42 ton · 400 m²",
     location: "Rionegro, Antioquia",
     image: "/projects/kerry/hero.jpg",
     description: "Estructura metálica compleja para la planta industrial de Kerry. Integración de sistemas de soporte para maquinaria pesada y pasarelas técnicas de mantenimiento.",

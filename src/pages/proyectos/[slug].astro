@@ -107,6 +107,11 @@ const creativeWorkSchema = {
             <p class="text-xl md:text-2xl font-light leading-[1.6] tracking-[-0.01em] max-w-[65ch]">
               {project.description}
             </p>
+            {project.participation && (
+              <p class="text-sm font-light text-[var(--color-primary)] border-l-2 border-[var(--color-primary)] pl-4 uppercase tracking-wider mt-6">
+                {project.participation}
+              </p>
+            )}
           </div>
         </div>
       </div>

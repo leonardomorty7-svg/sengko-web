@@ -547,9 +547,12 @@ const serviceImages = [
         <div>
           <span class="text-[var(--color-primary)] text-[9px] uppercase tracking-[0.2em] font-medium mb-6 block">Oficina Principal</span>
           <address class="not-italic text-white/50 text-sm font-light leading-[1.8] space-y-2">
-            <p>{siteConfig.contact.address}</p>
+            <p>Carr 39A # 64 -19 Of 302<br/>Medellín, Antioquia<br/>Colombia</p>
             <p class="pt-2"><a href={`mailto:${siteConfig.contact.email}`} class="hover:text-white transition-colors">{siteConfig.contact.email}</a></p>
             <p><a href={`tel:${siteConfig.contact.phone.replace(/[^0-9+]/g, '')}`} class="hover:text-white transition-colors">{siteConfig.contact.phone}</a></p>
+            {siteConfig.contact.phone2 && (
+              <p><a href={`tel:${siteConfig.contact.phone2.replace(/[^0-9+]/g, '')}`} class="hover:text-white transition-colors">{siteConfig.contact.phone2}</a></p>
+            )}
           </address>
         </div>
 
