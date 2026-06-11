@@ -10,6 +10,7 @@ export interface ProjectData {
   processes: string[];
   gallery: string[];
   participation?: string;
+  scope: string;
 }
 
 export const projects: ProjectData[] = [
@@ -29,7 +30,8 @@ export const projects: ProjectData[] = [
       "/projects/villa-hermosa/gallery-03.jpg",
       "/projects/villa-hermosa/gallery-04.jpg",
       "/projects/villa-hermosa/gallery-05.jpg"
-    ]
+    ],
+    scope: "Consultoría y Ejecución"
   },
   {
     title: "Postobón Malambo",
@@ -46,7 +48,8 @@ export const projects: ProjectData[] = [
       "/projects/postobon-malambo/gallery-01.jpg",
       "/projects/postobon-malambo/gallery-02.jpg",
       "/projects/postobon-malambo/gallery-03.jpg"
-    ]
+    ],
+    scope: "Consultoría"
   },
   {
     title: "Gonvarri",
@@ -62,7 +65,8 @@ export const projects: ProjectData[] = [
       "/projects/gonvarri/gallery-01.jpg",
       "/projects/gonvarri/gallery-02.jpg",
       "/projects/gonvarri/gallery-03.jpg"
-    ]
+    ],
+    scope: "Consultoría y Ejecución"
   },
   {
     title: "Cory",
@@ -78,7 +82,8 @@ export const projects: ProjectData[] = [
       "/projects/cory/gallery-01.jpg",
       "/projects/cory/gallery-02.jpg",
       "/projects/cory/gallery-03.jpg"
-    ]
+    ],
+    scope: "Consultoría y Ejecución"
   },
   {
     title: "Vivo Buenos Aires",
@@ -94,7 +99,8 @@ export const projects: ProjectData[] = [
       "/projects/vivo-buenos-aires/gallery-01.jpg",
       "/projects/vivo-buenos-aires/gallery-02.jpg",
       "/projects/vivo-buenos-aires/gallery-03.jpg"
-    ]
+    ],
+    scope: "Consultoría y Ejecución"
   },
   {
     title: "Puente Peatonal Hatovial",
@@ -111,7 +117,8 @@ export const projects: ProjectData[] = [
       "/projects/puente-hatovial/gallery-01.jpg",
       "/projects/puente-hatovial/gallery-02.jpg",
       "/projects/puente-hatovial/gallery-03.jpg"
-    ]
+    ],
+    scope: "Consultoría"
   },
   {
     title: "Portello 19",
@@ -127,7 +134,8 @@ export const projects: ProjectData[] = [
       "/projects/portello-19/gallery-01.jpg",
       "/projects/portello-19/gallery-02.jpg",
       "/projects/portello-19/gallery-03.jpg"
-    ]
+    ],
+    scope: "Consultoría y Ejecución"
   },
   {
     title: "Kerry",
@@ -143,7 +151,8 @@ export const projects: ProjectData[] = [
       "/projects/kerry/gallery-01.jpg",
       "/projects/kerry/gallery-02.jpg",
       "/projects/kerry/gallery-03.jpg"
-    ]
+    ],
+    scope: "Consultoría y Ejecución"
   },
   {
     title: "Parqueaderos y Cubiertas Metálicas",
@@ -159,7 +168,8 @@ export const projects: ProjectData[] = [
       "/projects/parqueaderos/gallery-01.jpg",
       "/projects/parqueaderos/gallery-02.jpg",
       "/projects/parqueaderos/gallery-03.jpg"
-    ]
+    ],
+    scope: "Consultoría y Ejecución"
   },
   {
     title: "Teatro Gestos Mnemes",
@@ -183,7 +193,8 @@ export const projects: ProjectData[] = [
       "/projects/teatro-gestos-mnemes/gallery-01.jpg",
       "/projects/teatro-gestos-mnemes/gallery-02.jpg",
       "/projects/teatro-gestos-mnemes/gallery-03.jpg"
-    ]
+    ],
+    scope: "Consultoría y Ejecución"
   },
   {
     title: "Bodega Textil",
@@ -207,6 +218,7 @@ export const projects: ProjectData[] = [
       "/projects/bodega-textil/gallery-01.jpg",
       "/projects/bodega-textil/gallery-02.jpg",
       "/projects/bodega-textil/gallery-03.jpg"
-    ]
+    ],
+    scope: "Consultoría y Ejecución"
   }
 ];

@@ -248,7 +248,10 @@ const serviceImages = [
                     </div>
                     <div class="flex flex-col">
                       <span class="text-white/30 text-[9px] uppercase tracking-[0.2em] mb-2">Ubicación</span>
-                      <span class="text-white/90 text-sm font-medium tracking-tight">{p.location}</span>
+                      <span class="text-white/90 text-sm font-medium tracking-tight mb-2">{p.location}</span>
+                      <span class="text-[var(--color-primary)] text-[8px] font-semibold tracking-[0.2em] uppercase inline-block">
+                        [ {p.scope} ]
+                      </span>
                     </div>
                   </div>
                   <div class="mt-10">
@@ -293,7 +296,10 @@ const serviceImages = [
                   </div>
                   <div>
                     <span class="text-white/30 text-[8px] uppercase tracking-wider block mb-1">Ubicación</span>
-                    <span class="text-white/80 text-xs">{p.location}</span>
+                    <span class="text-white/80 text-xs block mb-2">{p.location}</span>
+                    <span class="text-[var(--color-primary)] text-[8px] font-semibold tracking-[0.2em] uppercase inline-block">
+                      [ {p.scope} ]
+                    </span>
                   </div>
                 </div>
                 <div class="mt-6">
